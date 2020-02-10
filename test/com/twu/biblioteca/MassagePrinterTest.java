@@ -3,6 +3,8 @@ package com.twu.biblioteca;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
@@ -20,5 +22,20 @@ public class MassagePrinterTest {
         //then
         assertThat(75, is(boxMessage.length()));
         assertThat("******************\n*test line 1     *\n*test long line 2*\n******************", is(boxMessage));
+    }
+
+    @Test
+    public void ShouldPrintBooksInfoInBoxFormat() {
+        //given
+        ArrayList<String> messages = new ArrayList<String>(Arrays.asList("Water Margin1","Water Margin2"));
+        //when
+        String boxMessage = MassagePrinter.getBoxFormatMessageForArrayList(messages);
+        //then
+        assertThat("********************************************************\n" +
+                        "*Tittle: Water Margin1                                 *\n" +
+                        "*-----                                                 *\n" +
+                        "*Tittle: Water Margin2                                 *\n" +
+                        "********************************************************\n"
+                , is(boxMessage));
     }
 }

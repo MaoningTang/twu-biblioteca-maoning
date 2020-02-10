@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Stream;
 
@@ -27,5 +28,9 @@ public class MassagePrinter {
         for (int i = 0; i < boxWidth; i++) {
             builder.append(s);
         }
+    }
+
+    public static String getBoxFormatMessageForArrayList(ArrayList<String> arrayList){
+        return "Todo";
     }
 }
