@@ -27,7 +27,7 @@ public class MassagePrinterTest {
     @Test
     public void ShouldPrintBooksInfoInBoxFormat() {
         //given
-        ArrayList<String> messages = new ArrayList<String>(Arrays.asList("Water Margin1","Water Margin2"));
+        ArrayList<String> messages = new ArrayList<String>(Arrays.asList("Tittle: Water Margin1","Tittle: Water Margin2"));
         //when
         String boxMessage = MassagePrinter.getBoxFormatMessageForArrayList(messages);
         //then
