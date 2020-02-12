@@ -9,7 +9,7 @@ public class MassagePrinter {
 
     public static String printMessageWithBox(String[] messages){
         StringBuilder builder = new StringBuilder();
-        int boxWidth = Stream.of(messages).mapToInt(message -> message.length()).max().getAsInt() + 2;
+        int boxWidth = getBoxWidth(messages);
         constructBoxBoard(builder, boxWidth,"*");
         for(String message:messages){
             builder.append(System.lineSeparator());
@@ -31,14 +31,11 @@ public class MassagePrinter {
         }
     }
 
-    public static String getBoxFormatMessageForArrayList(String[] arrayList){
+    public static String getBoxFormatMessageForArrayList(String[] messages){
         StringBuilder builder = new StringBuilder();
-        int boxWidth = Stream.of(arrayList).mapToInt(message -> message.length()).max().getAsInt() + 2;
-        if (boxWidth<=56){
-            boxWidth = 56;
-        }
+        int boxWidth = getBoxWidth(messages);
         constructBoxBoard(builder, boxWidth,"*");
-        for(String message:arrayList){
+        for(String message:messages){
             builder.append(System.lineSeparator());
             builder.append("*");
             builder.append(message);
@@ -53,6 +50,14 @@ public class MassagePrinter {
         constructBoxBoard(builder, boxWidth,"*");
         builder.append(System.lineSeparator());
         return builder.toString();
+    }
+
+    private static int getBoxWidth(String[] messages) {
+        int boxWidth = Stream.of(messages).mapToInt(message -> message.length()).max().getAsInt() + 2;
+        if (boxWidth<=56){
+            boxWidth = 56;
+        }
+        return boxWidth;
     }
 
     private static void appendSectionIndicator(StringBuilder builder, int boxWidth) {
