@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Library {
     private static Library library_instance = null;
@@ -20,6 +21,10 @@ public class Library {
 
     public void setBooks(ArrayList<Book> books) {
         this.books = books;
+    }
+
+    public String[] toBooksStringArray(){
+        return books.stream().map(book -> {return book.toString();}).toArray(String[]::new);
     }
 
     public static Library getInstance() {

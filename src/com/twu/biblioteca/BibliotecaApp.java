@@ -11,5 +11,13 @@ public class BibliotecaApp {
         welcomeMessages[0] = "Welcome to Biblioteca.";
         welcomeMessages[1] = "Your one-stop-shop for great book titles in Bangalore!";
         System.out.println(MassagePrinter.printMessageWithBox(welcomeMessages));
+        printBookList();
+    }
+
+    public static void printBookList(){
+        Library library = Library.getInstance();
+        String[] booksToBePrinted = library.toBooksStringArray();
+        String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
+        System.out.println(formattedList);
     }
 }

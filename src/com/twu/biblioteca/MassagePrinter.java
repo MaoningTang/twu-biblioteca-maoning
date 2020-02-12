@@ -31,9 +31,9 @@ public class MassagePrinter {
         }
     }
 
-    public static String getBoxFormatMessageForArrayList(ArrayList<String> arrayList){
+    public static String getBoxFormatMessageForArrayList(String[] arrayList){
         StringBuilder builder = new StringBuilder();
-        int boxWidth = Collections.max(arrayList, Comparator.comparing(String::length)).length() + 2;
+        int boxWidth = Stream.of(arrayList).mapToInt(message -> message.length()).max().getAsInt() + 2;
         if (boxWidth<=56){
             boxWidth = 56;
         }
