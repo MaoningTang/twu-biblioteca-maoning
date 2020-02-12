@@ -13,4 +13,16 @@ public class LibraryTest {
         //then
         assertThat(4, is(library.getBooks().size()));
     }
+
+    @Test
+    public void ShouldGetBooksMatrix() {
+        //given
+        Library library = Library.getInstance();
+        //when
+        String[][] booksMatrix = library.toBooksMatrix();
+        //then
+        assertThat(4, is(library.getBooks().size()));
+        assertThat(booksMatrix[0][0], is("Tittle"));
+        assertThat(booksMatrix[1][0], is("Water Margin"));
+    }
 }

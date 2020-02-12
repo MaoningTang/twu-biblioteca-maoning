@@ -27,6 +27,15 @@ public class Library {
         return books.stream().map(book -> {return book.toString();}).toArray(String[]::new);
     }
 
+    public String[][] toBooksMatrix(){
+        String[][] result = new String[books.size()+1][];
+        String[][] tittleMatrix = new String[][]{{"Tittle","Author","Year Published"}};
+        String[][] booksMatrix = books.stream().map(book -> {return new String[]{book.getTittle(),book.getAuthor(),String.valueOf(book.getYearPublished())};}).toArray(String[][]::new);
+        System.arraycopy(tittleMatrix, 0, result, 0, tittleMatrix.length);
+        System.arraycopy(booksMatrix, 0, result, tittleMatrix.length, booksMatrix.length);
+        return result;
+    }
+
     public static Library getInstance() {
         if (library_instance == null)
             library_instance = new Library();

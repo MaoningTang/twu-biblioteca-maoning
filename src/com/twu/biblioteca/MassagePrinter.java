@@ -31,7 +31,7 @@ public class MassagePrinter {
 
     public static String getBoxFormatMessageForArrayList(String[][] bookMatrix){
         StringBuilder builder = new StringBuilder();
-        int[] columnsWidth = new int[bookMatrix.length];
+        int[] columnsWidth = new int[bookMatrix[0].length];
         for(int i = 0; i<columnsWidth.length; i++){
             String[] column = getColumn(i,bookMatrix);
             columnsWidth[i] = getBoxWidth(column);
