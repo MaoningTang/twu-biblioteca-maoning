@@ -31,6 +31,12 @@ public class MassagePrinterTest {
     @Test
     public void ShouldPrintBooksInfoInBoxFormat() {
         //given
+
+        new ArrayList<Book>(Arrays.asList(new Book("Water Margin","Naian Shi",1999),
+                new Book("The Journey to the West","Chengen Wu",1992),
+                new Book("A Dream of Red Mansions","Xueqin Cao",1990),
+                new Book("The Three Kingdoms Era","Guanzhong Luo",1997)));
+
         String[] tittles = {"Water Margin","The Journey to the West"};
         String[] authors= {"Naian Shi","Chengen Wu"};
         String[] yearPublisheds= {"1992","1990"};
@@ -39,6 +45,13 @@ public class MassagePrinterTest {
             {"Tittle","Author","Year Published"},
             {tittles,authors,yearPublisheds}
         };
+
+        HashMap<String,String[]> messages = new HashMap<String,String[]>(){{
+            put("Tittle",tittles);
+            put("Author",authors);
+            put("Year Published",yearPublisheds);
+        }};
+
         //when
         String boxMessage = MassagePrinter.getBoxFormatMessageForArrayList(messages);
         //then
