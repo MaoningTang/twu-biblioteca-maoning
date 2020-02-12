@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.stream.Stream;
 
 public class MassagePrinter {
@@ -31,7 +32,7 @@ public class MassagePrinter {
         }
     }
 
-    public static String getBoxFormatMessageForArrayList(String[] messages){
+    public static String getBoxFormatMessageForArrayList(HashMap<String,String[]>){
         StringBuilder builder = new StringBuilder();
         int boxWidth = getBoxWidth(messages);
         constructBoxBoard(builder, boxWidth,"*");
