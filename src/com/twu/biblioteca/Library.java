@@ -9,10 +9,10 @@ public class Library {
     private ArrayList<Book> books;
 
     private Library() {
-        books = new ArrayList<Book>(Arrays.asList(new Book("Water Margin"),
-                new Book("The Journey to the West"),
-                new Book("A Dream of Red Mansions"),
-                new Book("Romance of the Three KingdomsThe Three Kingdoms Era")));
+        books = new ArrayList<Book>(Arrays.asList(new Book("Water Margin","Naian Shi",1999),
+                new Book("The Journey to the West","Chengen Wu",1992),
+                new Book("A Dream of Red Mansions","Xueqin Cao",1990),
+                new Book("The Three Kingdoms Era","Guanzhong Luo",1997)));
     }
 
     public ArrayList<Book> getBooks() {
@@ -30,7 +30,6 @@ public class Library {
     public static Library getInstance() {
         if (library_instance == null)
             library_instance = new Library();
-
         return library_instance;
     }
 
