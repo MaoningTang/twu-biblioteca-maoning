@@ -16,7 +16,7 @@ public class BibliotecaApp {
 
     public static void printBookList(){
         Library library = Library.getInstance();
-        String[] booksToBePrinted = library.toBooksStringArray();
+        String[][] booksToBePrinted = library.toBooksMatrix();
         String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
         System.out.println(formattedList);
     }
