@@ -21,11 +21,11 @@ public class MassagePrinterTest {
         //when
         String boxMessage = MassagePrinter.printMessageWithBox(messages);
         //then
-        assertThat(227, is(boxMessage.length()));
-        assertThat("********************************************************" +
-                "\n*test line 1                                           *" +
-                "\n*test long line 2                                      *" +
-                "\n********************************************************", is(boxMessage));
+        assertThat(75, is(boxMessage.length()));
+        assertThat("******************\n" +
+                          "*test line 1     *\n" +
+                          "*test long line 2*\n" +
+                          "******************", is(boxMessage));
     }
 
     @Test
