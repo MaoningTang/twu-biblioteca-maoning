@@ -3,9 +3,13 @@ package com.twu.biblioteca;
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        printWellcomeMessage();
+        start();
     }
 
+    public static void start(){
+        printWellcomeMessage();
+        printBookList();
+    }
     public static void printWellcomeMessage(){
         String[] welcomeMessages = new String[2];
         welcomeMessages[0] = "Welcome to Biblioteca.";
@@ -20,4 +24,13 @@ public class BibliotecaApp {
         String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
         System.out.println(formattedList);
     }
+
+    public static void printMenu(){
+        System.out.println("ToDo");
+    }
+
+
+
+
+
 }
