@@ -48,10 +48,10 @@ public class BibliotecaAppTest {
         //given
         BibliotecaApp.printMenu();
         String menu = "======================================================\n" +
-                      "|| Menu   *Hint: Enter menu item number to select.* ||\n" +
-                      "======================================================\n" +
-                      "|| 1. List of books                                 ||\n" +
-                      "======================================================\n";
+                "|| Menu   *Hint: Enter menu item number to select.* ||\n" +
+                "======================================================\n" +
+                "|| 1. List of books                                 ||\n" +
+                "======================================================\n";
         // Then
         assertThat(testOut.toString().contains(menu), is(true));
     }
@@ -59,22 +59,23 @@ public class BibliotecaAppTest {
     @Test
     public void shouldNotPrintBookList() {
         //given
-        BibliotecaApp.printMenu();
+        String testString = "";
         String bookList = "Author";
+        provideInput(testString);
         //when
-        BibliotecaApp.start();
+        boolean error = BibliotecaApp.menuSelection();
         // Then
         assertThat(testOut.toString().contains(bookList), is(false));
+        assertThat(error, is(false));
     }
 
     @Test
     public void shouldPrintBookListAfterSelectMenuItem1() {
         //given
-        BibliotecaApp.printMenu();
         String testString = "1";
-        BibliotecaApp.start();
         //when
         provideInput(testString);
+        BibliotecaApp.start();
         //then
         assertThat(testOut.toString().contains("================================================================\n" +
                 "|| Tittle                  || Author        || Year Published ||\n" +
@@ -86,7 +87,7 @@ public class BibliotecaAppTest {
                 "|| A Dream of Red Mansions || Xueqin Cao    || 1990           ||\n" +
                 "================================================================\n" +
                 "|| The Three Kingdoms Era  || Guanzhong Luo || 1997           ||\n" +
-                "================================================================"), is(false));
+                "================================================================"), is(true));
     }
 
 }
