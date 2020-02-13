@@ -51,6 +51,8 @@ public class BibliotecaAppTest {
                 "|| Menu   *Hint: Enter menu item number to select.* ||\n" +
                 "======================================================\n" +
                 "|| 1. List of books                                 ||\n" +
+                "======================================================\n" +
+                "|| 2. Exit                                          ||\n" +
                 "======================================================\n";
         // Then
         assertThat(testOut.toString().contains(menu), is(true));
@@ -101,6 +103,20 @@ public class BibliotecaAppTest {
                 "================================================================\n" +
                 "|| The Three Kingdoms Era  || Guanzhong Luo || 1997           ||\n" +
                 "================================================================"), is(true));
+    }
+
+    @Test
+    public void shouldExit() {
+        //given
+        String testString = "****************\n" +
+                            "* Best wishes! *\n" +
+                            "****************";
+        provideInput(testString);
+        //when
+        boolean error = BibliotecaApp.menuSelection();
+        // Then
+        assertThat(testOut.toString().contains(""), is(true));
+        assertThat(error, is(false));
     }
 
 }
