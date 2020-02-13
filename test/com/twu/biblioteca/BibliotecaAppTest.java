@@ -66,7 +66,20 @@ public class BibliotecaAppTest {
         boolean error = BibliotecaApp.menuSelection();
         // Then
         assertThat(testOut.toString().contains(bookList), is(false));
-        assertThat(error, is(false));
+        assertThat(error, is(true));
+    }
+
+    @Test
+    public void shouldPrintErrorMessage() {
+        //given
+        String testString = "";
+        String bookList = "Author";
+        provideInput(testString);
+        //when
+        boolean error = BibliotecaApp.menuSelection();
+        // Then
+        assertThat(testOut.toString().contains("Please select a valid option!"), is(true));
+        assertThat(error, is(true));
     }
 
     @Test
