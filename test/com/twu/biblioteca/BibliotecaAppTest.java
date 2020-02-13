@@ -19,31 +19,22 @@ public class BibliotecaAppTest {
 
     @Before
     public void redirectSystemOutStream() {
-
-        originalSystemOut = System.out;
-
         // given
         systemOutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(systemOutContent));
-    }
-
-    @After
-    public void restoreSystemOutStream() {
-        System.setOut(originalSystemOut);
     }
 
     @Test
     public void shouldPrintMenu() {
         //given
         BibliotecaApp.printMenu();
-        String menu = "=============================================================\n" +
-                      "|| Menu *Hint: Enter menu item number to select.           ||\n" +
-                      "=============================================================\n" +
-                      "|| 1. List of books                                        ||\n" +
-                      "=============================================================\n";
+        String menu = "======================================================\n" +
+                      "|| Menu   *Hint: Enter menu item number to select.* ||\n" +
+                      "======================================================\n" +
+                      "|| 1. List of books                                 ||\n" +
+                      "======================================================\n";
         // when
-        System.out.println("example");
-        assertThat(systemOutContent.toString(), Is.is(menu));
+        assertThat(systemOutContent.toString().contains(menu), is(true));
     }
 
 }
