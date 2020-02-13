@@ -1,45 +1,22 @@
 package com.twu.biblioteca;
 
-public class Book {
-    private String tittle;
-    private String author;
-    private int yearPublished;
+public class Book extends IntellectualProperty{
 
     public Book() {
-        tittle = "Default Tittle";
+        super();
     }
 
     public Book(String tittle, String author, int yearPublished) {
-        this.tittle = tittle;
-        this.author = author;
-        this.yearPublished = yearPublished;
+      super(tittle, author, yearPublished);
     }
 
-    public int getYearPublished() {
-        return yearPublished;
+    @Override
+    public String[] getDetailArray() {
+        return new String[]{tittle,author,String.valueOf(yearPublished)};
     }
 
-    public void setYearPublished(int yearPublished) {
-        this.yearPublished = yearPublished;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-    public String getTittle() {
-        return tittle;
-    }
-
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
-    }
-
-    public String toString()
-    {
-        return "Tittle: " + tittle;
+    @Override
+    public String[] getColumnNames() {
+        return new String[]{"Tittle","Author","Year Published"};
     }
 }
