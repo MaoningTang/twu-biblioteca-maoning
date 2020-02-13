@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Arrays;
+
 public class BibliotecaApp {
 
     public static void main(String[] args) {
@@ -8,6 +10,7 @@ public class BibliotecaApp {
 
     public static void start(){
         printWellcomeMessage();
+        printMenu();
         printBookList();
     }
     public static void printWellcomeMessage(){
@@ -26,7 +29,15 @@ public class BibliotecaApp {
     }
 
     public static void printMenu(){
-        System.out.println("ToDo");
+        String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
+        String[] menuItems = new String[]{menuTittle,"List of books"};
+        for (int i = 1; i < menuItems.length; i++){
+            menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
+        }
+        String[][] menuItemMatrix = Arrays.stream(menuItems).map(item -> {return new String[]{item};}).toArray(String[][]::new);
+        String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(menuItemMatrix);
+        System.out.println(formattedList);
+        System.out.println(formattedList);
     }
 
 
