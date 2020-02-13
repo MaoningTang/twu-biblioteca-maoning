@@ -72,7 +72,7 @@ public class BibliotecaAppTest {
     @Test
     public void shouldPrintErrorMessage() {
         //given
-        String testString = "";
+        String testString = "x";
         String bookList = "Author";
         provideInput(testString);
         //when

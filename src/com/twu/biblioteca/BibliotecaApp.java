@@ -52,7 +52,7 @@ public class BibliotecaApp {
                 printBookList();
                 break;
             default:
-                System.out.println("Invalid menu choice, please try again.");
+                System.out.println("Please select a valid option!");
                 error = true;
                 break;
         }
