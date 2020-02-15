@@ -18,10 +18,10 @@ public class BibliotecaApp {
         Library libraryInstance = Library.getInstance();
         setUpLibrary(libraryInstance);
         setUpUser();
-        printMenu();
         boolean repeat = false;
         do {
-            printMenu();
+            String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
+            printMenu(new String[]{menuTittle,"List of books","Return a book","Exit"});
             repeat = menuSelection();
         } while (repeat);
     }
@@ -52,9 +52,7 @@ public class BibliotecaApp {
         System.out.println(formattedList);
     }
 
-    public static void printMenu(){
-        String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
-        String[] menuItems = new String[]{menuTittle,"List of books","Return a book","Exit"};
+    public static void printMenu(String[] menuItems){
         for (int i = 1; i < menuItems.length; i++){
             menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
         }
@@ -67,7 +65,6 @@ public class BibliotecaApp {
         Scanner scanner = new Scanner(System.in);
         int choice =  getInt(scanner);
         boolean repeat = true;
-        printMenu();
         switch (choice) {
             case 1:
                 printBookList();

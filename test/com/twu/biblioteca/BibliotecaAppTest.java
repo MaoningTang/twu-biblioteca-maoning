@@ -61,7 +61,8 @@ public class BibliotecaAppTest {
     @Test
     public void shouldPrintMenu() {
         //given
-        BibliotecaApp.printMenu();
+        String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
+        BibliotecaApp.printMenu(new String[]{menuTittle,"List of books","Return a book","Exit"});
         String menu = "======================================================\n" +
                 "|| Menu   *Hint: Enter menu item number to select.* ||\n" +
                 "======================================================\n" +
