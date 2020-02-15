@@ -25,4 +25,17 @@ public class LibraryTest {
         assertThat(booksMatrix[0][0], is("Tittle"));
         assertThat(booksMatrix[1][0], is("Water Margin"));
     }
+
+    @Test
+    public void ShouldCheckOut() {
+        //given
+        Library library = Library.getInstance();
+        //when
+        library.checkOut(1);
+        String[][] booksMatrix = library.toBooksMatrix();
+        //then
+        assertThat(4, is(library.getBooks().size()));
+        assertThat(booksMatrix[0][0], is("Tittle"));
+        assertThat(booksMatrix[1][0], is("The Journey to the West"));
+    }
 }

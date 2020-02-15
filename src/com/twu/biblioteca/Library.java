@@ -47,4 +47,8 @@ public class Library {
         return library_instance;
     }
 
+    public static void checkOut(int bookId){
+
+    }
+
 }
