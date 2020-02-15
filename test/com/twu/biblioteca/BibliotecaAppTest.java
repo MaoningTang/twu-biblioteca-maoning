@@ -7,8 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -174,7 +172,7 @@ public class BibliotecaAppTest {
         String testString = "2";
         provideInput(testString);
         //when
-        BibliotecaApp.checkOutBook();
+        BibliotecaApp.checkOut();
         // Then
         String checkoutMessage = "*******************************************\n" +
                              "*Please insert book id to checkout a book:*\n" +
@@ -188,7 +186,7 @@ public class BibliotecaAppTest {
         String testString = "2";
         provideInput(testString);
         //when
-        BibliotecaApp.checkOutBook();
+        BibliotecaApp.checkOut();
         // Then
         String successMessage = "Thank you! Enjoy the book.";
         assertThat(testOut.toString().contains(successMessage),is(true));
@@ -199,10 +197,10 @@ public class BibliotecaAppTest {
         //given
         String testString = "2";
         provideInput(testString);
-        BibliotecaApp.checkOutBook();
+        BibliotecaApp.checkOut();
         //when
         provideInput(testString);
-        BibliotecaApp.checkOutBook();
+        BibliotecaApp.checkOut();
         // Then
         String unSuccessMessage = "Sorry, that book is not available";
         assertThat(testOut.toString().contains(unSuccessMessage),is(true));
@@ -224,7 +222,7 @@ public class BibliotecaAppTest {
         //given
         String testString = "2";
         provideInput(testString);
-        BibliotecaApp.checkOutBook();
+        BibliotecaApp.checkOut();
         //when
         provideInput(testString);
         BibliotecaApp.returnBook();
@@ -239,7 +237,7 @@ public class BibliotecaAppTest {
         String checkoutId = "2";
         String returnId = "3";
         provideInput(checkoutId);
-        BibliotecaApp.checkOutBook();
+        BibliotecaApp.checkOut();
         //when
         provideInput(returnId);
         BibliotecaApp.returnBook();

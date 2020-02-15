@@ -14,17 +14,16 @@ public class LibraryTest {
     //given
     public void setUpLibrary() {
         library = Library.getInstance();
-        ArrayList<IntellectualProperty> books = new ArrayList<IntellectualProperty>(Arrays.asList(new Book(1,"Water Margin","Naian Shi",1999,null),
+        ArrayList<IntellectualProperty> items = new ArrayList<IntellectualProperty>(Arrays.asList(new Book(1,"Water Margin","Naian Shi",1999,null),
                 new Book(2,"The Journey to the West","Chengen Wu",1992,null),
                 new Book(3,"A Dream of Red Mansions","Xueqin Cao",1990,null),
-                new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null)));
-        ArrayList<IntellectualProperty> movies = new ArrayList<IntellectualProperty>(Arrays.asList(new Movie(1,"Spring in a Small Town","Fei Mu",1948,null,9),
+                new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null),
+                new Movie(1,"Spring in a Small Town","Fei Mu",1948,null,9),
                 new Movie(2,"Farewell My Concubine","Chen Kaige",1993,null,9),
                 new Movie(3,"A Better Tomorrow","John Woo",1986,null,8),
                 new Movie(4,"Days of Being Wild","Wong Kar-wai",1990,null,8),
                 new Movie(4,"In the Mood for Love","Wong Kar-wai",2000,null,7)));
-        library.setBooks(books);
-        library.setMovies(movies);
+        library.setItems(items);
     }
 
     @Test
@@ -68,7 +67,7 @@ public class LibraryTest {
     public void ShouldCheckOut() {
         //when
         Customer customer = new Customer(1);
-        library.checkOutBook(1,customer);
+        library.checkOut(1,customer,"book");
         String[][] booksMatrix = library.toBooksMatrix();
         //then
         Object[] books = library.getBooks().stream().filter(book -> book.checkOutBy == null).toArray();
@@ -84,7 +83,7 @@ public class LibraryTest {
     public void ShouldGetCheckedBooks() {
         //given
         Customer customer = new Customer(1);
-        library.checkOutBook(1,customer);
+        library.checkOut(1,customer,"book");
         //when
         String[][] booksMatrix = library.getCheckOutedBooks(customer);
         //then
@@ -98,7 +97,7 @@ public class LibraryTest {
     public void ShouldReturn() {
         //given
         Customer customer = new Customer(1);
-        library.checkOutBook(1,customer);
+        library.checkOut(1,customer,"book");
         //when
         library.returnBook(1,customer);
         String[][] booksMatrix = library.toBooksMatrix();
