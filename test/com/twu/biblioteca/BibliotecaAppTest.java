@@ -142,5 +142,4 @@ public class BibliotecaAppTest {
                              "*******************************************";
         assertThat(testOut.toString().contains(exitMessage),is(true));
     }
-
 }

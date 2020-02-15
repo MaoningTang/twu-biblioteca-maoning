@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Library {
     private static Library library_instance = null;
-    private ArrayList<IntellectualProperty> books;
+    private static ArrayList<IntellectualProperty> books;
 
     private Library() {
     }
@@ -48,7 +48,7 @@ public class Library {
         this.books = books;
     }
 
-    public void checkOutBook(long bookId, Customer checkOutBy){
+    public static void checkOutBook(long bookId, Customer checkOutBy){
         books.stream().filter(book -> book.id == bookId).forEach(b -> b.setCheckOutBy(checkOutBy));
     }
 

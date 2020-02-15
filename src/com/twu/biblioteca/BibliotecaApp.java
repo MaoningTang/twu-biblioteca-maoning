@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
+    private static AppUser user;
+
     public static void main(String[] args) {
         start();
     }
@@ -28,6 +30,11 @@ public class BibliotecaApp {
                 new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null)));
         library.setBooks(books);
     }
+
+    public void setUpUser() {
+        user = new Customer(1);
+    }
+
     public static void printWellcomeMessage(){
         String[] welcomeMessages = new String[2];
         welcomeMessages[0] = "Welcome to Biblioteca.";
@@ -74,7 +81,12 @@ public class BibliotecaApp {
     }
 
      public static void checkOutBook(){
-
+        String[] welcomeMessages = new String[1];
+        welcomeMessages[0] = "Please insert book id to checkout a book:";
+        System.out.println(MassagePrinter.printMessageWithBox(welcomeMessages));
+        Scanner scanner = new Scanner(System.in);
+        long input = getInt(scanner);
+        Library.checkOutBook(input,(Customer) user);
     }
 
     private static void printExitMessage() {
@@ -87,6 +99,17 @@ public class BibliotecaApp {
         int value = 0;
         try {
             value = scanner.nextInt();
+        }
+        catch (Exception e) {
+
+        }
+        return value;
+    }
+
+    private static long getLong(Scanner scanner) {
+        long value = 0;
+        try {
+            value = scanner.nextLong();
         }
         catch (Exception e) {
 
