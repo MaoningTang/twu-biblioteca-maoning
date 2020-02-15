@@ -1,9 +1,10 @@
 package com.twu.biblioteca;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Library {
     protected static Library library_instance = null;
@@ -49,8 +50,14 @@ public class Library {
         this.books = books;
     }
 
-    public static void checkOutBook(long bookId, Customer checkOutBy){
-        books.stream().filter(book -> book.id == bookId).forEach(b -> b.setCheckOutBy(checkOutBy));
+    public static boolean checkOutBook(long bookId, Customer checkOutBy){
+         Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.id == bookId).findFirst();
+         boolean success = false;
+         if(selectedBook.isPresent()){
+             selectedBook.get().setCheckOutBy(checkOutBy);
+             success = true;
+         }
+        return success;
     }
 
 }

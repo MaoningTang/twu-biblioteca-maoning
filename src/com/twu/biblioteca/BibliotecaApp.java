@@ -71,6 +71,7 @@ public class BibliotecaApp {
         switch (choice) {
             case 1:
                 printBookList();
+                checkOutBook();
                 break;
             case 2:
                 printExitMessage();
@@ -84,12 +85,16 @@ public class BibliotecaApp {
     }
 
      public static void checkOutBook(){
-        String[] welcomeMessages = new String[1];
-        welcomeMessages[0] = "Please insert book id to checkout a book:";
-        System.out.println(MassagePrinter.printMessageWithBox(welcomeMessages));
+        String[] messages = new String[1];
+        messages[0] = "Please insert book id to checkout a book:";
+        System.out.println(MassagePrinter.printMessageWithBox(messages));
         Scanner scanner = new Scanner(System.in);
         long input = getInt(scanner);
-        library.checkOutBook(input,(Customer) user);
+        boolean success = library.checkOutBook(input,(Customer) user);
+        if (success){
+            messages[0] = "Thank you! Enjoy the book.";
+            System.out.println(MassagePrinter.printMessageWithBox(messages));
+        }
     }
 
     private static void printExitMessage() {
