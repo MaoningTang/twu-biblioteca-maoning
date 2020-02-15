@@ -145,6 +145,18 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void shouldPrintCheckOutSuccessMessage() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        //when
+        BibliotecaApp.checkOutBook();
+        // Then
+        String successMessage = "Thank you! Enjoy the book.";
+        assertThat(testOut.toString().contains(successMessage),is(true));
+    }
+
+    @Test
     public void shouldNotPrintCheckedBook() {
         //given
         String testString = "2";
