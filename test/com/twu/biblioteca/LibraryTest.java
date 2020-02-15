@@ -65,7 +65,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void ShouldCheckOut() {
+    public void ShouldCheckOutBook() {
         //when
         Customer customer = new Customer(1);
         library.checkOutBook(1,customer);
@@ -78,6 +78,22 @@ public class LibraryTest {
         assertThat(booksMatrix[1].length,is(4));
         assertThat(booksMatrix[0][1], is("Tittle"));
         assertThat(booksMatrix[1][1], is("The Journey to the West"));
+    }
+
+    @Test
+    public void ShouldCheckOutMovie() {
+        //when
+        Customer customer = new Customer(1);
+        library.checkOutMovie(1,customer);
+        String[][] moviesMatrix = library.toMoviesMatrix();
+        //then
+        Object[] movies = library.getMovies().stream().filter(movie -> movie.checkOutBy == null).toArray();
+        assertThat(movies.length,is(4));
+        assertThat(library.getMovies().size(), is(5));
+        assertThat(library.getMovies().size(), is(5));
+        assertThat(moviesMatrix[1].length,is(5));
+        assertThat(moviesMatrix[0][1], is("Name"));
+        assertThat(moviesMatrix[1][1], is("Farewell My Concubine"));
     }
 
     @Test

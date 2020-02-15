@@ -29,10 +29,6 @@ public class Library {
         Library.movies = movies;
     }
 
-    public String[] toBooksStringArray(){
-        return books.stream().map(book -> {return book.toString();}).toArray(String[]::new);
-    }
-
     public static String[][] toBooksMatrix(){
         List<IntellectualProperty> booksToShow =  books.stream().filter(book -> book.checkOutBy == null).collect(Collectors.toList());
         String[][] result = toMatrix(booksToShow);
@@ -63,15 +59,24 @@ public class Library {
         return library_instance;
     }
 
-    protected Library(ArrayList<IntellectualProperty> books) {
-        this.books = books;
-    }
-
     public static boolean checkOutBook(long bookId, Customer checkOutBy){
         if (checkOutBy == null){
             return false;
         }
         Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.checkOutBy == null && book.id == bookId).findFirst();
+        boolean success = false;
+        if(selectedBook.isPresent()){
+            selectedBook.get().setCheckOutBy(checkOutBy);
+            success = true;
+        }
+        return success;
+    }
+
+    public static boolean checkOutMovie(long movieId, Customer checkOutBy){
+        if (checkOutBy == null){
+            return false;
+        }
+        Optional<IntellectualProperty> selectedBook = movies.stream().filter(movie -> movie.checkOutBy == null && movie.id == movieId).findFirst();
         boolean success = false;
         if(selectedBook.isPresent()){
             selectedBook.get().setCheckOutBy(checkOutBy);

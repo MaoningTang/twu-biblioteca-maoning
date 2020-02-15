@@ -32,8 +32,14 @@ public class BibliotecaApp {
     }
 
     public static void setUpMenuItems(){
+        if (menuItems !=null){
+            return;
+        }
         String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
         menuItems = new String[]{menuTittle,"List of books","List of movies","Return a book","Exit"};
+        for (int i = 1; i < menuItems.length; i++){
+            menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
+        }
     }
 
     public static void setUpLibrary(Library libraryInstance) {
@@ -76,13 +82,12 @@ public class BibliotecaApp {
         if (moviesToBePrinted != null){
             String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(moviesToBePrinted);
             System.out.println(formattedList);
+            checkOutMovie();
         }
     }
 
     public static void printMenu(String[] menuItems){
-        for (int i = 1; i < menuItems.length; i++){
-            menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
-        }
+
         String[][] menuItemMatrix = Arrays.stream(menuItems).map(item -> {return new String[]{item};}).toArray(String[][]::new);
         String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(menuItemMatrix);
         System.out.println(formattedList);
@@ -125,6 +130,22 @@ public class BibliotecaApp {
             System.out.println(MassagePrinter.printMessageWithBox(messages));
         }else{
             messages[0] = "Sorry, that book is not available";
+            System.out.println(MassagePrinter.printMessageWithBox(messages));
+        }
+    }
+
+    public static void checkOutMovie(){
+        String[] messages = new String[1];
+        messages[0] = "Please insert movie id to checkout a movie:";
+        System.out.println(MassagePrinter.printMessageWithBox(messages));
+        Scanner scanner = new Scanner(System.in);
+        long input = getLong(scanner);
+        boolean success = library.checkOutMovie(input,(Customer) user);
+        if (success){
+            messages[0] = "Thank you! Enjoy the movie.";
+            System.out.println(MassagePrinter.printMessageWithBox(messages));
+        }else{
+            messages[0] = "Sorry, that movie is not available";
             System.out.println(MassagePrinter.printMessageWithBox(messages));
         }
     }

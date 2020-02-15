@@ -57,7 +57,7 @@ public class BibliotecaAppTest {
     public void shouldPrintMenu() {
         //given
         String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
-        BibliotecaApp.printMenu(new String[]{menuTittle,"List of books","Return a book","Exit"});
+        BibliotecaApp.printMenu(new String[]{menuTittle,"1. List of books","2. Return a book","3. Exit"});
         String menu = "======================================================\n" +
                 "|| Menu   *Hint: Enter menu item number to select.* ||\n" +
                 "======================================================\n" +
@@ -75,10 +75,13 @@ public class BibliotecaAppTest {
     public void shouldHaveCorrectMenuItems() {
         //given
         BibliotecaApp.setUpMenuItems();
-        String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
-        String[] menuItems = new String[]{menuTittle,"List of books","List of movies","Return a book","Exit"};
+        String[] menuItems = new String[]{"Menu   *Hint: Enter menu item number to select.*", "1. List of books", "2. List of movies", "3. Return a book", "4 .Exit"};
         // Then
-        assertThat(BibliotecaApp.getMenuItems(), is(menuItems));
+        assertThat(BibliotecaApp.getMenuItems().length, is(menuItems.length));
+        assertThat(BibliotecaApp.getMenuItems()[0], is(menuItems[0]));
+        assertThat(BibliotecaApp.getMenuItems()[1], is(menuItems[1]));
+        assertThat(BibliotecaApp.getMenuItems()[2], is(menuItems[2]));
+        assertThat(BibliotecaApp.getMenuItems()[3], is(menuItems[3]));
     }
 
     @Test
@@ -169,7 +172,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldPrintCheckOutMessage() {
+    public void shouldPrintCheckOutBookMessage() {
         //given
         String testString = "2";
         provideInput(testString);
@@ -183,7 +186,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldPrintCheckOutSuccessMessage() {
+    public void shouldPrintCheckOutBookSuccessMessage() {
         //given
         String testString = "2";
         provideInput(testString);
@@ -195,7 +198,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldPrintCheckOutUnSuccessMessage() {
+    public void shouldPrintCheckOutBookUnSuccessMessage() {
         //given
         String testString = "2";
         provideInput(testString);
@@ -208,6 +211,45 @@ public class BibliotecaAppTest {
         assertThat(testOut.toString().contains(unSuccessMessage),is(true));
     }
 
+    @Test
+    public void shouldPrintCheckOutMovieMessage() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        //when
+        BibliotecaApp.checkOutMovie();
+        // Then
+        String checkoutMessage = "*******************************************\n" +
+                "*Please insert movie id to checkout a movie:*\n" +
+                "*******************************************";
+        assertThat(testOut.toString().contains(checkoutMessage),is(true));
+    }
+
+    @Test
+    public void shouldPrintCheckOutMovieSuccessMessage() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        //when
+        BibliotecaApp.checkOutMovie();
+        // Then
+        String successMessage = "Thank you! Enjoy the movie.";
+        assertThat(testOut.toString().contains(successMessage),is(true));
+    }
+
+    @Test
+    public void shouldPrintCheckOutMovieUnSuccessMessage() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        BibliotecaApp.checkOutMovie();
+        //when
+        provideInput(testString);
+        BibliotecaApp.checkOutMovie();
+        // Then
+        String unSuccessMessage = "Sorry, that movie is not available";
+        assertThat(testOut.toString().contains(unSuccessMessage),is(true));
+    }
 
     @Test
     public void shouldNotPrintCheckedBookInReturnList() {
