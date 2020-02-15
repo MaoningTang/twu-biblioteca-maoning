@@ -11,7 +11,7 @@ public class LibraryTest {
         //given
         Library library = Library.getInstance();
         //then
-        assertThat(4, is(library.getBooks().size()));
+        assertThat(library.getBooks().size(), is(4));
     }
 
     @Test
@@ -21,7 +21,7 @@ public class LibraryTest {
         //when
         String[][] booksMatrix = library.toBooksMatrix();
         //then
-        assertThat(4, is(library.getBooks().size()));
+        assertThat(library.getBooks().size(), is(4));
         assertThat(booksMatrix[0][0], is("Tittle"));
         assertThat(booksMatrix[1][0], is("Water Margin"));
     }
@@ -31,11 +31,16 @@ public class LibraryTest {
         //given
         Library library = Library.getInstance();
         //when
-        library.checkOut(1);
+        Customer customer = new Customer(1);
+        library.checkOutBook(1,customer);
         String[][] booksMatrix = library.toBooksMatrix();
         //then
-        assertThat(4, is(library.getBooks().size()));
-        assertThat(booksMatrix[0][0], is("Tittle"));
-        assertThat(booksMatrix[1][0], is("The Journey to the West"));
+        Object[] books = library.getBooks().stream().filter(book -> book.checkOutBy == null).toArray();
+        assertThat(books.length,is(3));
+        assertThat(library.getBooks().size(), is(4));
+        assertThat(library.getBooks().size(), is(4));
+        assertThat(booksMatrix[1].length,is(4));
+        assertThat(booksMatrix[0][1], is("Tittle"));
+        assertThat(booksMatrix[1][1], is("The Journey to the West"));
     }
 }
