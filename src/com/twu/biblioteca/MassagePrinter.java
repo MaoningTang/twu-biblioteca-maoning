@@ -76,23 +76,6 @@ public class MassagePrinter {
         return boxWidth;
     }
 
-    private static void appendSectionIndicator(StringBuilder builder, int boxWidth) {
-        builder.append(System.lineSeparator());
-        builder.append("*");
-        builder.append("-----");
-        for (int i = 6; i < boxWidth - 1; i++) {
-            builder.append(" ");
-        }
-        builder.append("*");
-    }
-
-    private static void deleteLastLine(StringBuilder builder) {
-        int last = builder.lastIndexOf("\n");
-        if (last >= 0) {
-            builder.delete(last, builder.length());
-        }
-    }
-
     private static String[] getColumn(int address, String[][] matrix) {
         return Arrays.stream(matrix).map(x -> x[address]).toArray(String[]::new);
     }

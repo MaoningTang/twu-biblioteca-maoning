@@ -24,7 +24,7 @@ public class Library {
         return books.stream().map(book -> {return book.toString();}).toArray(String[]::new);
     }
 
-    public String[][] toBooksMatrix(){
+    public static String[][] toBooksMatrix(){
         List<IntellectualProperty> booksToShow =  books.stream().filter(book -> book.checkOutBy == null).collect(Collectors.toList());
         String[][] result = toMatrix(booksToShow);
         return result;
@@ -56,7 +56,7 @@ public class Library {
         if (checkOutBy == null){
             return false;
         }
-        Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.id == bookId).findFirst();
+        Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.checkOutBy == null && book.id == bookId).findFirst();
         boolean success = false;
         if(selectedBook.isPresent()){
             selectedBook.get().setCheckOutBy(checkOutBy);

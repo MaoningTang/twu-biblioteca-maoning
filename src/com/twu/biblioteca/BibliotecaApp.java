@@ -73,7 +73,7 @@ public class BibliotecaApp {
                 checkOutInBookList();
                 break;
             case 2:
-                toReturenBookList();
+                toReturnBookList();
                 break;
             case 3:
                 printExitMessage();
@@ -130,11 +130,12 @@ public class BibliotecaApp {
         return value;
     }
 
-    public static void toReturenBookList() {
+    public static void toReturnBookList() {
         String[][] booksToBePrinted = library.getCheckOutedBooks((Customer) user);
         if (booksToBePrinted != null){
             String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
             System.out.println(formattedList);
+            returnBook();
         }
     }
 
@@ -147,6 +148,9 @@ public class BibliotecaApp {
         boolean success = library.returnBook(input,(Customer) user);
         if (success){
             messages[0] = "Thank you for returning the book.";
+            System.out.println(MassagePrinter.printMessageWithBox(messages));
+        }else {
+            messages[0] = "That is not a valid book to return.";
             System.out.println(MassagePrinter.printMessageWithBox(messages));
         }
     }

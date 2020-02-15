@@ -172,48 +172,20 @@ public class BibliotecaAppTest {
         provideInput(testString);
         BibliotecaApp.checkOutBook();
         //when
+        provideInput(testString);
         BibliotecaApp.checkOutBook();
         // Then
         String unSuccessMessage = "Sorry, that book is not available";
         assertThat(testOut.toString().contains(unSuccessMessage),is(true));
     }
 
-    @Test
-    public void shouldNotPrintCheckedBook() {
-        //given
-        String testString = "2";
-        provideInput(testString);
-        //when
-        BibliotecaApp.checkOutBook();
-        // Then
-        BibliotecaApp.checkOutInBookList();
-        String bookList = "===========================================================================\n" +
-                "|| 2       || The Journey to the West || Chengen Wu    || 1992           ||\n" +
-                "===========================================================================\n";
-        assertThat(testOut.toString().contains(bookList),is(false));
-    }
-
-    @Test
-    public void shouldPrintCheckedBookInReturnList() {
-        //given
-        String testString = "2";
-        provideInput(testString);
-        //when
-        BibliotecaApp.checkOutBook();
-        // Then
-        BibliotecaApp.toReturenBookList();
-        String bookList = "===========================================================================\n" +
-                "|| 2       || The Journey to the West || Chengen Wu    || 1992           ||\n" +
-                "===========================================================================\n";
-        assertThat(testOut.toString().contains(bookList),is(false));
-    }
 
     @Test
     public void shouldNotPrintCheckedBookInReturnList() {
         //given
         String bookList = "|| Book Id || Tittle                  || Author        || Year Published ||";
         //when
-        BibliotecaApp.toReturenBookList();
+        BibliotecaApp.toReturnBookList();
         //then
         assertThat(testOut.toString().contains(bookList),is(false));
     }
@@ -230,5 +202,20 @@ public class BibliotecaAppTest {
         // Then
         String successMessage = "Thank you for returning the book";
         assertThat(testOut.toString().contains(successMessage),is(true));
+    }
+
+    @Test
+    public void shouldPrintUnSuccessReturnMessage() {
+        //given
+        String checkoutId = "2";
+        String returnId = "3";
+        provideInput(checkoutId);
+        BibliotecaApp.checkOutBook();
+        //when
+        provideInput(returnId);
+        BibliotecaApp.returnBook();
+        // Then
+        String unSuccessMessage = "That is not a valid book to return.";
+        assertThat(testOut.toString().contains(unSuccessMessage),is(true));
     }
 }

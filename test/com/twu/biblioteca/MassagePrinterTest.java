@@ -1,12 +1,6 @@
 package com.twu.biblioteca;
 
 import org.junit.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
