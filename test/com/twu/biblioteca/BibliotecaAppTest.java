@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class BibliotecaAppTest {
@@ -75,7 +76,6 @@ public class BibliotecaAppTest {
     public void shouldPrintErrorMessage() {
         //given
         String testString = "x";
-        String bookList = "Author";
         provideInput(testString);
         //when
         boolean error = BibliotecaApp.menuSelection();
@@ -108,15 +108,16 @@ public class BibliotecaAppTest {
     @Test
     public void shouldExit() {
         //given
-        String testString = "****************\n" +
-                            "* Best wishes! *\n" +
-                            "****************";
+        String testString = "2";
         provideInput(testString);
         //when
-        boolean error = BibliotecaApp.menuSelection();
+        boolean stop = BibliotecaApp.menuSelection();
         // Then
-        assertThat(testOut.toString().contains(""), is(true));
-        assertThat(error, is(false));
+        String exitMessage = "**************\n" +
+                             "*Best wishes!*\n" +
+                             "**************";
+        assertThat(testOut.toString().contains(exitMessage),is(true));
+        assertThat(stop, is(false));
     }
 
 }
