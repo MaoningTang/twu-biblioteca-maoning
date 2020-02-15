@@ -63,4 +63,12 @@ public class Library {
         return success;
     }
 
+    public static String[][] getCheckOutedBooks(Customer checkOutBy){
+        return new String[][]{};
+    }
+
+    public static boolean returnBook(long bookId, Customer returnBy){
+        return false;
+    }
+
 }

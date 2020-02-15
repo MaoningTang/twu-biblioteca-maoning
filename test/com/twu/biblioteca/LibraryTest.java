@@ -53,4 +53,37 @@ public class LibraryTest {
         assertThat(booksMatrix[0][1], is("Tittle"));
         assertThat(booksMatrix[1][1], is("The Journey to the West"));
     }
+
+    @Test
+    public void ShouldGetCheckedBooks() {
+        //given
+        Customer customer = new Customer(1);
+        library.checkOutBook(1,customer);
+        //when
+        String[][] booksMatrix = library.getCheckOutedBooks(customer);
+        //then
+        assertThat(booksMatrix.length,is(1));
+        assertThat(booksMatrix[1][0], is("1"));
+        assertThat(booksMatrix[0][1], is("Tittle"));
+        assertThat(booksMatrix[1][1], is("Water Margin"));
+    }
+
+    @Test
+    public void ShouldReturn() {
+        //given
+        Customer customer = new Customer(1);
+        library.checkOutBook(1,customer);
+        String[][] booksMatrix = library.toBooksMatrix();
+        //when
+        library.returnBook(1,customer);
+        //then
+        Object[] books = library.getBooks().stream().filter(book -> book.checkOutBy == null).toArray();
+        assertThat(books.length,is(4));
+        assertThat(library.getBooks().size(), is(4));
+        assertThat(library.getBooks().size(), is(4));
+        assertThat(booksMatrix[1].length,is(4));
+        assertThat(booksMatrix[1][0], is("1"));
+        assertThat(booksMatrix[0][1], is("Tittle"));
+        assertThat(booksMatrix[1][1], is("Water Margin"));
+    }
 }
