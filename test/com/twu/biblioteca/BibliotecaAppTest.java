@@ -38,6 +38,11 @@ public class BibliotecaAppTest {
         BibliotecaApp.setUpLibrary(library);
     }
 
+    @Before
+    public void  setUpUser(){
+        BibliotecaApp.setUpUser();
+    }
+
     @After
     public void restoreSystemInputOutput() {
         System.setIn(systemIn);
@@ -100,7 +105,7 @@ public class BibliotecaAppTest {
         String testString = "1";
         //when
         provideInput(testString);
-        BibliotecaApp.start();
+        boolean repeat = BibliotecaApp.menuSelection();
         //then
         assertThat(testOut.toString().contains("===========================================================================\n" +
                 "|| Book Id || Tittle                  || Author        || Year Published ||\n" +
@@ -113,6 +118,7 @@ public class BibliotecaAppTest {
                 "===========================================================================\n" +
                 "|| 4       || The Three Kingdoms Era  || Guanzhong Luo || 1997           ||\n" +
                 "==========================================================================="), is(true));
+        assertThat(repeat, is(true));
     }
 
     @Test
@@ -179,14 +185,8 @@ public class BibliotecaAppTest {
         // Then
         BibliotecaApp.printBookList();
         String bookList = "===========================================================================\n" +
-                "|| Book Id || Tittle                  || Author        || Year Published ||\n" +
-                "===========================================================================\n" +
-                "|| 1       || Water Margin            || Naian Shi     || 1999           ||\n" +
-                "===========================================================================\n" +
-                "|| 3       || A Dream of Red Mansions || Xueqin Cao    || 1990           ||\n" +
-                "===========================================================================\n" +
-                "|| 4       || The Three Kingdoms Era  || Guanzhong Luo || 1997           ||\n" +
-                "===========================================================================";
-        assertThat(testOut.toString().contains(bookList),is(true));
+                "|| 2       || The Journey to the West || Chengen Wu    || 1992           ||\n" +
+                "===========================================================================\n";
+        assertThat(testOut.toString().contains(bookList),is(false));
     }
 }

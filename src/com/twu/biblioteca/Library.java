@@ -51,12 +51,15 @@ public class Library {
     }
 
     public static boolean checkOutBook(long bookId, Customer checkOutBy){
-         Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.id == bookId).findFirst();
-         boolean success = false;
-         if(selectedBook.isPresent()){
-             selectedBook.get().setCheckOutBy(checkOutBy);
-             success = true;
-         }
+        if (checkOutBy == null){
+            return false;
+        }
+        Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.id == bookId).findFirst();
+        boolean success = false;
+        if(selectedBook.isPresent()){
+            selectedBook.get().setCheckOutBy(checkOutBy);
+            success = true;
+        }
         return success;
     }
 

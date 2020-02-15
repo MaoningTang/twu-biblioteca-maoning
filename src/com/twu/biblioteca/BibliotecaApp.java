@@ -19,10 +19,11 @@ public class BibliotecaApp {
         setUpLibrary(libraryInstance);
         setUpUser();
         printMenu();
-        boolean error = false;
+        boolean repeat = false;
         do {
-            error = menuSelection();
-        } while (error);
+            printMenu();
+            repeat = menuSelection();
+        } while (repeat);
     }
 
     public static void setUpLibrary(Library libraryInstance) {
@@ -46,7 +47,6 @@ public class BibliotecaApp {
     }
 
     public static void printBookList(){
-        Library library = Library.getInstance();
         String[][] booksToBePrinted = library.toBooksMatrix();
         String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
         System.out.println(formattedList);
@@ -66,7 +66,7 @@ public class BibliotecaApp {
     public static boolean menuSelection(){
         Scanner scanner = new Scanner(System.in);
         int choice =  getInt(scanner);
-        boolean error = false;
+        boolean repeat = true;
         printMenu();
         switch (choice) {
             case 1:
@@ -75,13 +75,13 @@ public class BibliotecaApp {
                 break;
             case 2:
                 printExitMessage();
+                repeat = false;
                 break;
             default:
                 System.out.println("Please select a valid option!");
-                error = true;
                 break;
         }
-        return error;
+        return repeat;
     }
 
      public static void checkOutBook(){
@@ -89,10 +89,13 @@ public class BibliotecaApp {
         messages[0] = "Please insert book id to checkout a book:";
         System.out.println(MassagePrinter.printMessageWithBox(messages));
         Scanner scanner = new Scanner(System.in);
-        long input = getInt(scanner);
+        long input = getLong(scanner);
         boolean success = library.checkOutBook(input,(Customer) user);
         if (success){
             messages[0] = "Thank you! Enjoy the book.";
+            System.out.println(MassagePrinter.printMessageWithBox(messages));
+        }else{
+            messages[0] = "Sorry, that book is not available";
             System.out.println(MassagePrinter.printMessageWithBox(messages));
         }
     }
