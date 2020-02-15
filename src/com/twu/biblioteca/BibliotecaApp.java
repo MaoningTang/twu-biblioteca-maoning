@@ -46,10 +46,13 @@ public class BibliotecaApp {
         System.out.println(MassagePrinter.printMessageWithBox(welcomeMessages));
     }
 
-    public static void printBookList(){
+    public static void checkOutInBookList(){
         String[][] booksToBePrinted = library.toBooksMatrix();
-        String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
-        System.out.println(formattedList);
+        if (booksToBePrinted != null){
+            String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
+            System.out.println(formattedList);
+            checkOutBook();
+        }
     }
 
     public static void printMenu(String[] menuItems){
@@ -67,11 +70,10 @@ public class BibliotecaApp {
         boolean repeat = true;
         switch (choice) {
             case 1:
-                printBookList();
-                checkOutBook();
+                checkOutInBookList();
                 break;
             case 2:
-                printReturnBookList();
+                toReturenBookList();
                 break;
             case 3:
                 printExitMessage();
@@ -128,13 +130,11 @@ public class BibliotecaApp {
         return value;
     }
 
-
-    public static void printReturnBookList() {
+    public static void toReturenBookList() {
         String[][] booksToBePrinted = library.getCheckOutedBooks((Customer) user);
         if (booksToBePrinted != null){
             String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
             System.out.println(formattedList);
         }
     }
-
 }

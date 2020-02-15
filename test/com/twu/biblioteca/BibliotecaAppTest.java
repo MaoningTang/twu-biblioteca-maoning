@@ -186,7 +186,7 @@ public class BibliotecaAppTest {
         //when
         BibliotecaApp.checkOutBook();
         // Then
-        BibliotecaApp.printBookList();
+        BibliotecaApp.checkOutInBookList();
         String bookList = "===========================================================================\n" +
                 "|| 2       || The Journey to the West || Chengen Wu    || 1992           ||\n" +
                 "===========================================================================\n";
@@ -201,7 +201,7 @@ public class BibliotecaAppTest {
         //when
         BibliotecaApp.checkOutBook();
         // Then
-        BibliotecaApp.printReturnBookList();
+        BibliotecaApp.toReturenBookList();
         String bookList = "===========================================================================\n" +
                 "|| 2       || The Journey to the West || Chengen Wu    || 1992           ||\n" +
                 "===========================================================================\n";
@@ -213,7 +213,7 @@ public class BibliotecaAppTest {
         //given
         String bookList = "|| Book Id || Tittle                  || Author        || Year Published ||";
         //when
-        BibliotecaApp.printReturnBookList();
+        BibliotecaApp.toReturenBookList();
         //then
         assertThat(testOut.toString().contains(bookList),is(false));
     }
