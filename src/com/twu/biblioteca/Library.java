@@ -7,31 +7,40 @@ import java.util.stream.Collectors;
 
 public class Library {
     protected static Library library_instance = null;
-    protected static ArrayList<IntellectualProperty> items;
+    protected static ArrayList<IntellectualProperty> books;
+    protected static ArrayList<IntellectualProperty> movies;
 
     protected Library() {
     }
 
     public ArrayList<IntellectualProperty> getBooks() {
-        return items.stream().filter(item -> item.getClass() == Book.class).collect(Collectors.toCollection(ArrayList::new));
+        return books;
     }
 
-    public void setItems(ArrayList<IntellectualProperty> items) {
-        this.items = items;
+    public void setBooks(ArrayList<IntellectualProperty> books) {
+        this.books = books;
     }
 
     public static ArrayList<IntellectualProperty> getMovies() {
-        return items.stream().filter(item -> item.getClass() == Movie.class).collect(Collectors.toCollection(ArrayList::new));
+        return movies;
+    }
+
+    public static void setMovies(ArrayList<IntellectualProperty> movies) {
+        Library.movies = movies;
+    }
+
+    public String[] toBooksStringArray(){
+        return books.stream().map(book -> {return book.toString();}).toArray(String[]::new);
     }
 
     public static String[][] toBooksMatrix(){
-        List<IntellectualProperty> booksToShow =  items.stream().filter(item -> item.getClass() == Book.class && item.checkOutBy == null).collect(Collectors.toList());
+        List<IntellectualProperty> booksToShow =  books.stream().filter(book -> book.checkOutBy == null).collect(Collectors.toList());
         String[][] result = toMatrix(booksToShow);
         return result;
     }
 
     public static String[][] toMoviesMatrix(){
-        List<IntellectualProperty> moviesToShow =  items.stream().filter(item -> item.getClass() == Movie.class && item.checkOutBy == null).collect(Collectors.toList());
+        List<IntellectualProperty> moviesToShow =  movies.stream().filter(movie -> movie.checkOutBy == null).collect(Collectors.toList());
         String[][] result = toMatrix(moviesToShow);
         return result;
     }
@@ -54,29 +63,25 @@ public class Library {
         return library_instance;
     }
 
-    public static boolean checkOut(long id, Customer checkOutBy,String type){
+    protected Library(ArrayList<IntellectualProperty> books) {
+        this.books = books;
+    }
+
+    public static boolean checkOutBook(long bookId, Customer checkOutBy){
         if (checkOutBy == null){
             return false;
         }
-        Optional<IntellectualProperty> selectedItem = null;
-        switch (type){
-            case "book":
-                selectedItem = items.stream().filter(item -> item.getClass() == Book.class && item.checkOutBy == null && item.id == id).findFirst();
-                break;
-            case "movie":
-                selectedItem = items.stream().filter(item -> item.getClass() == Movie.class && item.checkOutBy == null && item.id == id).findFirst();
-                break;
-        }
+        Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.checkOutBy == null && book.id == bookId).findFirst();
         boolean success = false;
-        if(selectedItem.isPresent()){
-            selectedItem.get().setCheckOutBy(checkOutBy);
+        if(selectedBook.isPresent()){
+            selectedBook.get().setCheckOutBy(checkOutBy);
             success = true;
         }
         return success;
     }
 
     public static String[][] getCheckOutedBooks(Customer checkOutBy){
-        List<IntellectualProperty> booksToShow = items.stream().filter(item -> item.getClass() == Book.class && item.checkOutBy != null && item.checkOutBy.equals(checkOutBy)).collect(Collectors.toList());
+        List<IntellectualProperty> booksToShow = books.stream().filter(book -> book.checkOutBy != null && book.checkOutBy.equals(checkOutBy)).collect(Collectors.toList());
         String[][] result = toMatrix(booksToShow);
         return result;
     }
@@ -85,7 +90,7 @@ public class Library {
         if (returnBy == null){
             return false;
         }
-        Optional<IntellectualProperty> selectedBook = items.stream().filter(item ->  item.getClass() == Book.class && item.checkOutBy != null && item.id == bookId).findFirst();
+        Optional<IntellectualProperty> selectedBook = books.stream().filter(book ->book.checkOutBy != null && book.id == bookId).findFirst();
         boolean success = false;
         if(selectedBook.isPresent()){
             selectedBook.get().setCheckOutBy(null);
