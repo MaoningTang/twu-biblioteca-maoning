@@ -32,6 +32,9 @@ public class Library {
     }
 
     private static String[][] toMatrix(List<IntellectualProperty> properties) {
+        if (properties.size() == 0){
+            return null;
+        }
         String[][] result = new String[properties.size()+1][];
         String[][] tittleMatrix = new String[][]{properties.get(0).getColumnNames()};
         String[][] booksMatrix = properties.stream().map(property -> {return property.getDetailArray();}).toArray(String[][]::new);

@@ -67,8 +67,10 @@ public class BibliotecaAppTest {
                 "======================================================\n" +
                 "|| 1. List of books                                 ||\n" +
                 "======================================================\n" +
-                "|| 2. Exit                                          ||\n" +
-                "======================================================\n";
+                "|| 2. Return a book                                 ||\n" +
+                "======================================================\n" +
+                "|| 3. Exit                                          ||\n" +
+                "======================================================";
         // Then
         assertThat(testOut.toString().contains(menu), is(true));
     }
@@ -124,7 +126,7 @@ public class BibliotecaAppTest {
     @Test
     public void shouldExit() {
         //given
-        String testString = "2";
+        String testString = "3";
         provideInput(testString);
         //when
         boolean stop = BibliotecaApp.menuSelection();
@@ -187,6 +189,31 @@ public class BibliotecaAppTest {
         String bookList = "===========================================================================\n" +
                 "|| 2       || The Journey to the West || Chengen Wu    || 1992           ||\n" +
                 "===========================================================================\n";
+        assertThat(testOut.toString().contains(bookList),is(false));
+    }
+
+    @Test
+    public void shouldPrintCheckedBookInReturnList() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        //when
+        BibliotecaApp.checkOutBook();
+        // Then
+        BibliotecaApp.printReturnBookList();
+        String bookList = "===========================================================================\n" +
+                "|| 2       || The Journey to the West || Chengen Wu    || 1992           ||\n" +
+                "===========================================================================\n";
+        assertThat(testOut.toString().contains(bookList),is(false));
+    }
+
+    @Test
+    public void shouldNotPrintCheckedBookInReturnList() {
+        //given
+        String bookList = "|| Book Id || Tittle                  || Author        || Year Published ||";
+        //when
+        BibliotecaApp.printReturnBookList();
+        //then
         assertThat(testOut.toString().contains(bookList),is(false));
     }
 }

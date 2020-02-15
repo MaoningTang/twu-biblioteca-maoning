@@ -54,7 +54,7 @@ public class BibliotecaApp {
 
     public static void printMenu(){
         String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
-        String[] menuItems = new String[]{menuTittle,"List of books","Exit"};
+        String[] menuItems = new String[]{menuTittle,"List of books","Return a book","Exit"};
         for (int i = 1; i < menuItems.length; i++){
             menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
         }
@@ -74,6 +74,9 @@ public class BibliotecaApp {
                 checkOutBook();
                 break;
             case 2:
+                printReturnBookList();
+                break;
+            case 3:
                 printExitMessage();
                 repeat = false;
                 break;
@@ -128,5 +131,13 @@ public class BibliotecaApp {
         return value;
     }
 
+
+    public static void printReturnBookList() {
+        String[][] booksToBePrinted = library.getCheckOutedBooks((Customer) user);
+        if (booksToBePrinted != null){
+            String formattedList = MassagePrinter.getBoxFormatMessageForArrayList(booksToBePrinted);
+            System.out.println(formattedList);
+        }
+    }
 
 }
