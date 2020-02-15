@@ -35,6 +35,7 @@ public class BibliotecaAppTest {
                 new Book(3,"A Dream of Red Mansions","Xueqin Cao",1990,null),
                 new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null)));
         library.setBooks(books);
+        BibliotecaApp.setUpLibrary(library);
     }
 
     @After
@@ -137,9 +138,30 @@ public class BibliotecaAppTest {
         //when
         BibliotecaApp.checkOutBook();
         // Then
-        String exitMessage = "*******************************************\n" +
+        String checkoutMessage = "*******************************************\n" +
                              "*Please insert book id to checkout a book:*\n" +
                              "*******************************************";
-        assertThat(testOut.toString().contains(exitMessage),is(true));
+        assertThat(testOut.toString().contains(checkoutMessage),is(true));
+    }
+
+    @Test
+    public void shouldNotPrintCheckedBook() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        //when
+        BibliotecaApp.checkOutBook();
+        // Then
+        BibliotecaApp.printBookList();
+        String bookList = "===========================================================================\n" +
+                "|| Book Id || Tittle                  || Author        || Year Published ||\n" +
+                "===========================================================================\n" +
+                "|| 1       || Water Margin            || Naian Shi     || 1999           ||\n" +
+                "===========================================================================\n" +
+                "|| 3       || A Dream of Red Mansions || Xueqin Cao    || 1990           ||\n" +
+                "===========================================================================\n" +
+                "|| 4       || The Three Kingdoms Era  || Guanzhong Luo || 1997           ||\n" +
+                "===========================================================================";
+        assertThat(testOut.toString().contains(bookList),is(true));
     }
 }

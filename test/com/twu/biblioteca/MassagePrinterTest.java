@@ -33,9 +33,8 @@ public class MassagePrinterTest {
         String[][] messages = new String[][]{
             {"Tittle","Author","Year Published"},
             {"Water Margin","Naian Shi","1992"},
-                {"The Journey to the West","Chengen Wu","1990"}
+            {"The Journey to the West","Chengen Wu","1990"}
         };
-
         //when
         String boxMessage = MassagePrinter.getBoxFormatMessageForArrayList(messages);
         //then

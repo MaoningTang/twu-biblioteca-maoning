@@ -1,14 +1,15 @@
 package com.twu.biblioteca;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Library {
-    private static Library library_instance = null;
-    private static ArrayList<IntellectualProperty> books;
+    protected static Library library_instance = null;
+    protected static ArrayList<IntellectualProperty> books;
 
-    private Library() {
+    protected Library() {
     }
 
     public ArrayList<IntellectualProperty> getBooks() {
@@ -44,7 +45,7 @@ public class Library {
         return library_instance;
     }
 
-    public Library(ArrayList<IntellectualProperty> books) {
+    protected Library(ArrayList<IntellectualProperty> books) {
         this.books = books;
     }
 

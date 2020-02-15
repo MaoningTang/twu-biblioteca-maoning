@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class BibliotecaApp {
 
     private static AppUser user;
+    private static Library library;
 
     public static void main(String[] args) {
         start();
@@ -14,7 +15,9 @@ public class BibliotecaApp {
 
     public static void start(){
         printWellcomeMessage();
-        setUpLibrary();
+        Library libraryInstance = Library.getInstance();
+        setUpLibrary(libraryInstance);
+        setUpUser();
         printMenu();
         boolean error = false;
         do {
@@ -22,8 +25,8 @@ public class BibliotecaApp {
         } while (error);
     }
 
-    public static void setUpLibrary() {
-        Library library = Library.getInstance();
+    public static void setUpLibrary(Library libraryInstance) {
+        library = libraryInstance;
         ArrayList<IntellectualProperty> books = new ArrayList<IntellectualProperty>(Arrays.asList(new Book(1,"Water Margin","Naian Shi",1999,null),
                 new Book(2,"The Journey to the West","Chengen Wu",1992,null),
                 new Book(3,"A Dream of Red Mansions","Xueqin Cao",1990,null),
@@ -31,7 +34,7 @@ public class BibliotecaApp {
         library.setBooks(books);
     }
 
-    public void setUpUser() {
+    public static void  setUpUser() {
         user = new Customer(1);
     }
 
@@ -86,7 +89,7 @@ public class BibliotecaApp {
         System.out.println(MassagePrinter.printMessageWithBox(welcomeMessages));
         Scanner scanner = new Scanner(System.in);
         long input = getInt(scanner);
-        Library.checkOutBook(input,(Customer) user);
+        library.checkOutBook(input,(Customer) user);
     }
 
     private static void printExitMessage() {
