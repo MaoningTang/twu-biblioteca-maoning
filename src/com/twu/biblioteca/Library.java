@@ -75,7 +75,7 @@ public class Library {
         if (returnBy == null){
             return false;
         }
-        Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.id == bookId).findFirst();
+        Optional<IntellectualProperty> selectedBook = books.stream().filter(book ->book.checkOutBy != null && book.id == bookId).findFirst();
         boolean success = false;
         if(selectedBook.isPresent()){
             selectedBook.get().setCheckOutBy(null);

@@ -137,4 +137,17 @@ public class BibliotecaApp {
             System.out.println(formattedList);
         }
     }
+
+    public static void returnBook(){
+        String[] messages = new String[1];
+        messages[0] = "Please insert book id to return a book:";
+        System.out.println(MassagePrinter.printMessageWithBox(messages));
+        Scanner scanner = new Scanner(System.in);
+        long input = getLong(scanner);
+        boolean success = library.returnBook(input,(Customer) user);
+        if (success){
+            messages[0] = "Thank you for returning the book.";
+            System.out.println(MassagePrinter.printMessageWithBox(messages));
+        }
+    }
 }

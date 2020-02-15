@@ -217,4 +217,18 @@ public class BibliotecaAppTest {
         //then
         assertThat(testOut.toString().contains(bookList),is(false));
     }
+
+    @Test
+    public void shouldPrintReturnSuccessMessage() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        BibliotecaApp.checkOutBook();
+        //when
+        provideInput(testString);
+        BibliotecaApp.returnBook();
+        // Then
+        String successMessage = "Thank you for returning the book";
+        assertThat(testOut.toString().contains(successMessage),is(true));
+    }
 }
