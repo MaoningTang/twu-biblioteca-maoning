@@ -31,7 +31,7 @@ public class Library {
         return result;
     }
 
-    private String[][] toMatrix(List<IntellectualProperty> properties) {
+    private static String[][] toMatrix(List<IntellectualProperty> properties) {
         String[][] result = new String[properties.size()+1][];
         String[][] tittleMatrix = new String[][]{properties.get(0).getColumnNames()};
         String[][] booksMatrix = properties.stream().map(property -> {return property.getDetailArray();}).toArray(String[][]::new);
@@ -64,11 +64,22 @@ public class Library {
     }
 
     public static String[][] getCheckOutedBooks(Customer checkOutBy){
-        return new String[][]{};
+        List<IntellectualProperty> booksToShow = books.stream().filter(book -> book.checkOutBy != null && book.checkOutBy.equals(checkOutBy)).collect(Collectors.toList());
+        String[][] result = toMatrix(booksToShow);
+        return result;
     }
 
     public static boolean returnBook(long bookId, Customer returnBy){
-        return false;
+        if (returnBy == null){
+            return false;
+        }
+        Optional<IntellectualProperty> selectedBook = books.stream().filter(book -> book.id == bookId).findFirst();
+        boolean success = false;
+        if(selectedBook.isPresent()){
+            selectedBook.get().setCheckOutBy(null);
+            success = true;
+        }
+        return success;
     }
 
 }

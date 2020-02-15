@@ -62,7 +62,7 @@ public class LibraryTest {
         //when
         String[][] booksMatrix = library.getCheckOutedBooks(customer);
         //then
-        assertThat(booksMatrix.length,is(1));
+        assertThat(booksMatrix.length,is(2));
         assertThat(booksMatrix[1][0], is("1"));
         assertThat(booksMatrix[0][1], is("Tittle"));
         assertThat(booksMatrix[1][1], is("Water Margin"));
@@ -73,9 +73,9 @@ public class LibraryTest {
         //given
         Customer customer = new Customer(1);
         library.checkOutBook(1,customer);
-        String[][] booksMatrix = library.toBooksMatrix();
         //when
         library.returnBook(1,customer);
+        String[][] booksMatrix = library.toBooksMatrix();
         //then
         Object[] books = library.getBooks().stream().filter(book -> book.checkOutBy == null).toArray();
         assertThat(books.length,is(4));
