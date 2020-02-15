@@ -1,20 +1,14 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Library {
     private static Library library_instance = null;
     private ArrayList<IntellectualProperty> books;
 
     private Library() {
-        books = new ArrayList<IntellectualProperty>(Arrays.asList(new Book(1,"Water Margin","Naian Shi",1999,null),
-                new Book(2,"The Journey to the West","Chengen Wu",1992,null),
-                new Book(3,"A Dream of Red Mansions","Xueqin Cao",1990,null),
-                new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null)));
     }
 
     public ArrayList<IntellectualProperty> getBooks() {

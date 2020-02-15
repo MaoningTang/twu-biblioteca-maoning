@@ -1,35 +1,45 @@
 package com.twu.biblioteca;
-
+import org.junit.Before;
 import org.junit.Test;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class LibraryTest {
+
+    private Library library;
+    @Before
+    //given
+    public void setUpLibrary() {
+        library = Library.getInstance();
+        ArrayList<IntellectualProperty> books = new ArrayList<IntellectualProperty>(Arrays.asList(new Book(1,"Water Margin","Naian Shi",1999,null),
+                new Book(2,"The Journey to the West","Chengen Wu",1992,null),
+                new Book(3,"A Dream of Red Mansions","Xueqin Cao",1990,null),
+                new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null)));
+        library.setBooks(books);
+    }
+
     @Test
     public void ShouldPrintMessageInBoxFormat() {
-        //given
-        Library library = Library.getInstance();
         //then
         assertThat(library.getBooks().size(), is(4));
     }
 
     @Test
     public void ShouldGetBooksMatrix() {
-        //given
-        Library library = Library.getInstance();
         //when
         String[][] booksMatrix = library.toBooksMatrix();
         //then
         assertThat(library.getBooks().size(), is(4));
-        assertThat(booksMatrix[0][0], is("Tittle"));
-        assertThat(booksMatrix[1][0], is("Water Margin"));
+        assertThat(booksMatrix[1].length,is(4));
+        assertThat(booksMatrix[0][1], is("Tittle"));
+        assertThat(booksMatrix[1][1], is("Water Margin"));
     }
 
     @Test
     public void ShouldCheckOut() {
-        //given
-        Library library = Library.getInstance();
         //when
         Customer customer = new Customer(1);
         library.checkOutBook(1,customer);

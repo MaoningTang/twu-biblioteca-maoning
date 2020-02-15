@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,11 +12,21 @@ public class BibliotecaApp {
 
     public static void start(){
         printWellcomeMessage();
+        setUpLibrary();
         printMenu();
         boolean error = false;
         do {
             error = menuSelection();
         } while (error);
+    }
+
+    public static void setUpLibrary() {
+        Library library = Library.getInstance();
+        ArrayList<IntellectualProperty> books = new ArrayList<IntellectualProperty>(Arrays.asList(new Book(1,"Water Margin","Naian Shi",1999,null),
+                new Book(2,"The Journey to the West","Chengen Wu",1992,null),
+                new Book(3,"A Dream of Red Mansions","Xueqin Cao",1990,null),
+                new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null)));
+        library.setBooks(books);
     }
     public static void printWellcomeMessage(){
         String[] welcomeMessages = new String[2];
