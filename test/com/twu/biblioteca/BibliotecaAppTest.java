@@ -157,6 +157,19 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void shouldPrintCheckOutUnSuccessMessage() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        BibliotecaApp.checkOutBook();
+        //when
+        BibliotecaApp.checkOutBook();
+        // Then
+        String unSuccessMessage = "Sorry, that book is not available";
+        assertThat(testOut.toString().contains(unSuccessMessage),is(true));
+    }
+
+    @Test
     public void shouldNotPrintCheckedBook() {
         //given
         String testString = "2";
