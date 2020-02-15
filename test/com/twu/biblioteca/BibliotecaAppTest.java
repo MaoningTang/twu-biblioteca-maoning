@@ -30,11 +30,6 @@ public class BibliotecaAppTest {
     @Before
     public void setUpLibrary(){
         library = Library.getInstance();
-        ArrayList<IntellectualProperty> books = new ArrayList<IntellectualProperty>(Arrays.asList(new Book(1,"Water Margin","Naian Shi",1999,null),
-                new Book(2,"The Journey to the West","Chengen Wu",1992,null),
-                new Book(3,"A Dream of Red Mansions","Xueqin Cao",1990,null),
-                new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null)));
-        library.setBooks(books);
         BibliotecaApp.setUpLibrary(library);
     }
 
@@ -74,6 +69,16 @@ public class BibliotecaAppTest {
                 "======================================================";
         // Then
         assertThat(testOut.toString().contains(menu), is(true));
+    }
+
+    @Test
+    public void shouldHaveCorrectMenuItems() {
+        //given
+        BibliotecaApp.setUpMenuItems();
+        String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
+        String[] menuItems = new String[]{menuTittle,"List of books","List of movies","Return a book","Exit"};
+        // Then
+        assertThat(BibliotecaApp.getMenuItems(), is(menuItems));
     }
 
     @Test
@@ -125,9 +130,33 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void shouldPrintMovieListAfterSelectMenuItem1() {
+        //given
+        String testString = "2";
+        //when
+        provideInput(testString);
+        boolean repeat = BibliotecaApp.menuSelection();
+        //then
+        assertThat(testOut.toString().contains("====================================================================================\n" +
+                "|| Movie Id || Name                   || Director     || Year Published || Rating ||\n" +
+                "====================================================================================\n" +
+                "|| 1        || Spring in a Small Town || Fei Mu       || 1948           || 9      ||\n" +
+                "====================================================================================\n" +
+                "|| 2        || Farewell My Concubine  || Chen Kaige   || 1993           || 9      ||\n" +
+                "====================================================================================\n" +
+                "|| 3        || A Better Tomorrow      || John Woo     || 1986           || 8      ||\n" +
+                "====================================================================================\n" +
+                "|| 4        || Days of Being Wild     || Wong Kar-wai || 1990           || 8      ||\n" +
+                "====================================================================================\n" +
+                "|| 4        || In the Mood for Love   || Wong Kar-wai || 2000           || 7      ||\n" +
+                "====================================================================================\n"), is(true));
+        assertThat(repeat, is(true));
+    }
+
+    @Test
     public void shouldExit() {
         //given
-        String testString = "3";
+        String testString = "4";
         provideInput(testString);
         //when
         boolean stop = BibliotecaApp.menuSelection();
