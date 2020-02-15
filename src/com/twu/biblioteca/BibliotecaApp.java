@@ -73,6 +73,10 @@ public class BibliotecaApp {
         return error;
     }
 
+     public static void checkOutBook(){
+
+    }
+
     private static void printExitMessage() {
         String[] welcomeMessages = new String[1];
         welcomeMessages[0] = "Best wishes!";

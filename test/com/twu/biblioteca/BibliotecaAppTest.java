@@ -129,4 +129,18 @@ public class BibliotecaAppTest {
         assertThat(stop, is(false));
     }
 
+    @Test
+    public void shouldPrintCheckOutMessage() {
+        //given
+        String testString = "2";
+        provideInput(testString);
+        //when
+        BibliotecaApp.checkOutBook();
+        // Then
+        String exitMessage = "*******************************************\n" +
+                             "*Please insert book id to checkout a book:*\n" +
+                             "*******************************************";
+        assertThat(testOut.toString().contains(exitMessage),is(true));
+    }
+
 }
