@@ -33,7 +33,7 @@ public class BibliotecaApp {
 
     public static void printMenu(){
         String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
-        String[] menuItems = new String[]{menuTittle,"List of books"};
+        String[] menuItems = new String[]{menuTittle,"List of books","Exit"};
         for (int i = 1; i < menuItems.length; i++){
             menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
         }
@@ -51,12 +51,21 @@ public class BibliotecaApp {
             case 1:
                 printBookList();
                 break;
+            case 2:
+                printExitMessage();
+                break;
             default:
                 System.out.println("Please select a valid option!");
                 error = true;
                 break;
         }
         return error;
+    }
+
+    private static void printExitMessage() {
+        String[] welcomeMessages = new String[1];
+        welcomeMessages[0] = "Best wishes!";
+        System.out.println(MassagePrinter.printMessageWithBox(welcomeMessages));
     }
 
     private static int getInt(Scanner scanner) {
