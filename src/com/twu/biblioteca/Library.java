@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Library {
     protected static Library library_instance = null;
     protected static ArrayList<IntellectualProperty> books;
+    protected static ArrayList<IntellectualProperty> movies;
 
     protected Library() {
     }
@@ -20,6 +21,14 @@ public class Library {
         this.books = books;
     }
 
+    public static ArrayList<IntellectualProperty> getMovies() {
+        return movies;
+    }
+
+    public static void setMovies(ArrayList<IntellectualProperty> movies) {
+        Library.movies = movies;
+    }
+
     public String[] toBooksStringArray(){
         return books.stream().map(book -> {return book.toString();}).toArray(String[]::new);
     }
@@ -27,6 +36,12 @@ public class Library {
     public static String[][] toBooksMatrix(){
         List<IntellectualProperty> booksToShow =  books.stream().filter(book -> book.checkOutBy == null).collect(Collectors.toList());
         String[][] result = toMatrix(booksToShow);
+        return result;
+    }
+
+    public static String[][] toMoviesMatrix(){
+        List<IntellectualProperty> moviesToShow =  movies.stream().filter(movie -> movie.checkOutBy == null).collect(Collectors.toList());
+        String[][] result = toMatrix(moviesToShow);
         return result;
     }
 

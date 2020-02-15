@@ -23,11 +23,11 @@ public class Movie extends IntellectualProperty{
 
     @Override
     public String[] getDetailArray() {
-        return new String[0];
+        return new String[]{String.valueOf(id),tittle,author,String.valueOf(yearPublished),String.valueOf(rating)};
     }
 
     @Override
     public String[] getColumnNames() {
-        return new String[0];
+        return new String[]{"Movie Id","Name","Director","Year Published","Rating"};
     }
 }
