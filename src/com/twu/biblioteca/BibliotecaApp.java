@@ -40,7 +40,7 @@ public class BibliotecaApp {
             return;
         }
         String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
-        menuItems = new String[]{menuTittle,"List of books","List of movies","Return a book","Exit"};
+        menuItems = new String[]{menuTittle,"List of books","List of movies","Return a book","Personal detail","Exit"};
         for (int i = 1; i < menuItems.length; i++){
             menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
         }
@@ -122,6 +122,9 @@ public class BibliotecaApp {
                 toReturnBookList();
                 break;
             case 4:
+                showPersonalDetail();
+                break;
+            case 5:
                 saveChanges("movieList.txt","bookList.txt");
                 printExitMessage();
                 repeat = false;
@@ -133,7 +136,17 @@ public class BibliotecaApp {
         return repeat;
     }
 
-     public static void checkOutBook(){
+    public static void showPersonalDetail() {
+        String[] messages = new String[]{
+            "Your personal detail:",
+            "Name: " + user.name,
+                "Email: " + user.email,
+                "Phone number: " + user.phoneNumber
+        };
+        System.out.println(MassagePrinter.printMessageWithBox(messages));
+    }
+
+    public static void checkOutBook(){
         String[] messages = new String[1];
         messages[0] = "Please insert book id to checkout a book:";
         System.out.println(MassagePrinter.printMessageWithBox(messages));
@@ -237,7 +250,10 @@ public class BibliotecaApp {
         boolean success = false;
         if (matchedUser.isPresent()) {
             Long userId = Long.valueOf(matchedUser.get()[2]);
-            user = new Customer(userId);
+            String name = matchedUser.get()[3];
+            String email = matchedUser.get()[4];
+            String phone = matchedUser.get()[5];
+            user = new Customer(userId,name,email,phone);
             String[] messages = new String[]{"Successfully login."};
             System.out.println(MassagePrinter.printMessageWithBox(messages));
             success = true;

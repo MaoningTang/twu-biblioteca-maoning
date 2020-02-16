@@ -73,7 +73,7 @@ public class BibliotecaAppTest {
     public void shouldHaveCorrectMenuItems() {
         //given
         BibliotecaApp.setUpMenuItems();
-        String[] menuItems = new String[]{"Menu   *Hint: Enter menu item number to select.*", "1. List of books", "2. List of movies", "3. Return a book", "4 .Exit"};
+        String[] menuItems = new String[]{"Menu   *Hint: Enter menu item number to select.*", "1. List of books", "2. List of movies", "3. Return a book","4. Personal detail", "5 .Exit"};
         // Then
         assertThat(BibliotecaApp.getMenuItems().length, is(menuItems.length));
         assertThat(BibliotecaApp.getMenuItems()[0], is(menuItems[0]));
@@ -157,7 +157,7 @@ public class BibliotecaAppTest {
     @Test
     public void shouldSaveAfterExit() {
         //given
-        String testString = "4";
+        String testString = "5";
         provideInput(testString);
         //when
         boolean stop = BibliotecaApp.menuSelection();
@@ -320,5 +320,25 @@ public class BibliotecaAppTest {
         assertThat(success,is(false));
         assertThat(testOut.toString().contains(successMessage),is(false));
         assertThat(testOut.toString().contains(unsuccessMessage),is(true));
+    }
+
+    @Test
+    public void shouldPrintPersonalDetail(){
+        //given
+        String userName = "123-4567"+ "\r\n";
+        String password = "abcd";
+        String fileName = "testUserInfo.txt";
+        String personalDetail = "*********************************\n" +
+                "*Your personal detail:          *\n" +
+                "*Name: Maoning                  *\n" +
+                "*Email: maoning.thoughtworks.com*\n" +
+                "*Phone number: 11111111111      *\n" +
+                "*********************************";
+        provideInput(userName + password );
+        boolean success = BibliotecaApp.login(fileName);
+        //when
+        BibliotecaApp.showPersonalDetail();
+        //then
+        assertThat(testOut.toString().contains(personalDetail),is(true));
     }
 }
