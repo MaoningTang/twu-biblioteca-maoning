@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class BibliotecaApp {
@@ -22,13 +23,15 @@ public class BibliotecaApp {
         printWellcomeMessage();
         Library libraryInstance = Library.getInstance();
         setUpLibrary(libraryInstance);
-        setUpUser();
-        setUpMenuItems();
-        boolean repeat = false;
-        do {
-            printMenu(menuItems);
-            repeat = menuSelection();
-        } while (repeat);
+        boolean loginSuccess =  login("userInfo.txt");
+        if (loginSuccess){
+            setUpMenuItems();
+            boolean repeat = false;
+            do {
+                printMenu(menuItems);
+                repeat = menuSelection();
+            } while (repeat);
+        }
     }
 
     public static void setUpMenuItems(){
@@ -52,7 +55,7 @@ public class BibliotecaApp {
                 new Movie(2,"Farewell My Concubine","Chen Kaige",1993,null,9),
                 new Movie(3,"A Better Tomorrow","John Woo",1986,null,8),
                 new Movie(4,"Days of Being Wild","Wong Kar-wai",1990,null,8),
-                new Movie(4,"In the Mood for Love","Wong Kar-wai",2000,null,7)));
+                new Movie(5,"In the Mood for Love","Wong Kar-wai",2000,null,7)));
         library.setBooks(books);
         library.setMovies(movies);
     }
@@ -202,4 +205,28 @@ public class BibliotecaApp {
             System.out.println(MassagePrinter.printMessageWithBox(messages));
         }
     }
+
+    public static boolean login(String fileName) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String[]> users = FileIO.readFile(fileName);
+        System.out.println("Enter user name:");
+        String userName = scanner.nextLine();
+        System.out.println("Enter password:");
+        String passWord = scanner.nextLine();
+
+        Optional<String[]> matchedUser = users.stream().filter(userInfo -> userInfo[0].equals(userName) && userInfo[1].equals(passWord)).findFirst();
+        boolean success = false;
+        if (matchedUser.isPresent()) {
+            Long userId = Long.valueOf(matchedUser.get()[2]);
+            user = new Customer(userId);
+            String[] messages = new String[]{"Successfully login."};
+            System.out.println(MassagePrinter.printMessageWithBox(messages));
+            success = true;
+        }else {
+            String[] messages = new String[]{"Please check your password and user name."};
+            System.out.println(MassagePrinter.printMessageWithBox(messages));
+        }
+        return success;
+    }
+
 }

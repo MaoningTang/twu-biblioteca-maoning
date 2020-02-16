@@ -7,8 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -151,7 +149,7 @@ public class BibliotecaAppTest {
                 "====================================================================================\n" +
                 "|| 4        || Days of Being Wild     || Wong Kar-wai || 1990           || 8      ||\n" +
                 "====================================================================================\n" +
-                "|| 4        || In the Mood for Love   || Wong Kar-wai || 2000           || 7      ||\n" +
+                "|| 5        || In the Mood for Love   || Wong Kar-wai || 2000           || 7      ||\n" +
                 "====================================================================================\n"), is(true));
         assertThat(repeat, is(true));
     }
@@ -288,5 +286,39 @@ public class BibliotecaAppTest {
         // Then
         String unSuccessMessage = "That is not a valid book to return.";
         assertThat(testOut.toString().contains(unSuccessMessage),is(true));
+    }
+
+    @Test
+    public void shouldLogin(){
+        //given
+        String userName = "123-4567"+ "\r\n";
+        String password = "abcd";
+        String fileName = "testUserInfo.txt";
+        String successMessage =  "Successfully login.";
+        String unsuccessMessage =  "Please check your password and user name.";
+        //when
+        provideInput(userName + password);
+        boolean success = BibliotecaApp.login(fileName);
+        //then
+        assertThat(success,is(true));
+        assertThat(testOut.toString().contains(successMessage),is(true));
+        assertThat(testOut.toString().contains(unsuccessMessage),is(false));
+    }
+
+    @Test
+    public void shouldNotLogin(){
+        //given
+        String userName = "123-4567"+ "\r\n";
+        String password = "abc";
+        String fileName = "testUserInfo.txt";
+        String successMessage =  "Successfully login.";
+        String unsuccessMessage =  "Please check your password and user name.";
+        //when
+        provideInput(userName + password);
+        boolean success = BibliotecaApp.login(fileName);
+        //then
+        assertThat(success,is(false));
+        assertThat(testOut.toString().contains(successMessage),is(false));
+        assertThat(testOut.toString().contains(unsuccessMessage),is(true));
     }
 }

@@ -86,7 +86,7 @@ public class Library {
     }
 
     public static String[][] getCheckOutedBooks(Customer checkOutBy){
-        List<IntellectualProperty> booksToShow = books.stream().filter(book -> book.checkOutBy != null && book.checkOutBy.equals(checkOutBy)).collect(Collectors.toList());
+        List<IntellectualProperty> booksToShow = books.stream().filter(book -> book.checkOutBy != null && book.checkOutBy.userId == checkOutBy.userId).collect(Collectors.toList());
         String[][] result = toMatrix(booksToShow);
         return result;
     }
