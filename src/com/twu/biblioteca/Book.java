@@ -6,22 +6,22 @@ public class Book extends IntellectualProperty{
         super();
     }
 
-    public Book(long id, String tittle, String author, int yearPublished, Customer checkOutBy) {
-        super(id, tittle, author, yearPublished, checkOutBy);
+    public Book(long id, String title, String author, int yearPublished, Customer checkOutBy) {
+        super(id, title, author, yearPublished, checkOutBy);
     }
 
     @Override
     public String[] getDetailToDisplayArray() {
-        return new String[]{String.valueOf(id),tittle,author,String.valueOf(yearPublished)};
+        return new String[]{String.valueOf(id),title,author,String.valueOf(yearPublished)};
     }
 
     @Override
     public String[] getFullDetailArray() {
-        return new String[]{String.valueOf(id),tittle,author,String.valueOf(yearPublished),super.getCheckOutUserId()};
+        return new String[]{String.valueOf(id),title,author,String.valueOf(yearPublished),super.getCheckOutUserId()};
     }
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Book Id","Tittle","Author","Year Published"};
+        return new String[]{"Book Id","Title","Author","Year Published"};
     }
 }

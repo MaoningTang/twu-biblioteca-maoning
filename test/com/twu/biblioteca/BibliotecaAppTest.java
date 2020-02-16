@@ -54,8 +54,8 @@ public class BibliotecaAppTest {
     @Test
     public void shouldPrintMenu() {
         //given
-        String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
-        BibliotecaApp.printMenu(new String[]{menuTittle,"1. List of books","2. Return a book","3. Exit"});
+        String menuTitle = "Menu   *Hint: Enter menu item number to select.*";
+        BibliotecaApp.printMenu(new String[]{menuTitle,"1. List of books","2. Return a book","3. Exit"});
         String menu = "======================================================\n" +
                 "|| Menu   *Hint: Enter menu item number to select.* ||\n" +
                 "======================================================\n" +
@@ -117,7 +117,7 @@ public class BibliotecaAppTest {
         boolean repeat = BibliotecaApp.menuSelection();
         //then
         assertThat(testOut.toString().contains("===========================================================================\n" +
-                "|| Book Id || Tittle                  || Author        || Year Published ||\n" +
+                "|| Book Id || Title                   || Author        || Year Published ||\n" +
                 "===========================================================================\n" +
                 "|| 1       || Water Margin            || Naian Shi     || 1999           ||\n" +
                 "===========================================================================\n" +
@@ -252,7 +252,7 @@ public class BibliotecaAppTest {
     @Test
     public void shouldNotPrintCheckedBookInReturnList() {
         //given
-        String bookList = "|| Book Id || Tittle                  || Author        || Year Published ||";
+        String bookList = "|| Book Id || Title                  || Author        || Year Published ||";
         //when
         BibliotecaApp.toReturnBookList();
         //then

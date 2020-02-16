@@ -39,8 +39,8 @@ public class BibliotecaApp {
         if (menuItems !=null){
             return;
         }
-        String menuTittle = "Menu   *Hint: Enter menu item number to select.*";
-        menuItems = new String[]{menuTittle,"List of books","List of movies","Return a book","Personal detail","Exit"};
+        String menuTitle = "Menu   *Hint: Enter menu item number to select.*";
+        menuItems = new String[]{menuTitle,"List of books","List of movies","Return a book","Personal detail","Exit"};
         for (int i = 1; i < menuItems.length; i++){
             menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
         }
@@ -50,22 +50,22 @@ public class BibliotecaApp {
         library = libraryInstance;
         ArrayList<IntellectualProperty> books = FileIO.readFile(bookListFileName).stream().map(line -> {
             long id  = Long.valueOf(line[0]);
-            String tittle = line[1];
+            String title = line[1];
             String author = line[2];
             int year = Integer.valueOf(line[3]);
             long userId = line[4].equals("null")?0:Long.valueOf(line[4]);
             Customer customer = userId == 0?null:new Customer(userId);
-            return new Book(id, tittle, author, year,customer);
+            return new Book(id, title, author, year,customer);
         }).collect(Collectors.toCollection(ArrayList<IntellectualProperty>::new));
         ArrayList<IntellectualProperty> movies = FileIO.readFile(movieListFileName).stream().map(line -> {
             long id  = Long.valueOf(line[0]);
-            String tittle = line[1];
+            String title = line[1];
             String author = line[2];
             int year = Integer.valueOf(line[3]);
             long userId = line[4].equals("null")?0:Long.valueOf(line[4]);
             Customer customer = userId == 0?null:new Customer(userId);
             int rating = Integer.valueOf(line[5]);
-            return new Movie(id, tittle, author, year,customer,rating);
+            return new Movie(id, title, author, year,customer,rating);
         }).collect(Collectors.toCollection(ArrayList<IntellectualProperty>::new));
         library.setBooks(books);
         library.setMovies(movies);

@@ -46,7 +46,7 @@ public class LibraryTest {
         //then
         assertThat(library.getBooks().size(), is(4));
         assertThat(booksMatrix[1].length,is(4));
-        assertThat(booksMatrix[0][1], is("Tittle"));
+        assertThat(booksMatrix[0][1], is("Title"));
         assertThat(booksMatrix[1][1], is("Water Margin"));
     }
 
@@ -76,7 +76,7 @@ public class LibraryTest {
         assertThat(library.getBooks().size(), is(4));
         assertThat(library.getBooks().size(), is(4));
         assertThat(booksMatrix[1].length,is(4));
-        assertThat(booksMatrix[0][1], is("Tittle"));
+        assertThat(booksMatrix[0][1], is("Title"));
         assertThat(booksMatrix[1][1], is("The Journey to the West"));
     }
 
@@ -106,7 +106,7 @@ public class LibraryTest {
         //then
         assertThat(booksMatrix.length,is(2));
         assertThat(booksMatrix[1][0], is("1"));
-        assertThat(booksMatrix[0][1], is("Tittle"));
+        assertThat(booksMatrix[0][1], is("Title"));
         assertThat(booksMatrix[1][1], is("Water Margin"));
     }
 
@@ -125,7 +125,7 @@ public class LibraryTest {
         assertThat(library.getBooks().size(), is(4));
         assertThat(booksMatrix[1].length,is(4));
         assertThat(booksMatrix[1][0], is("1"));
-        assertThat(booksMatrix[0][1], is("Tittle"));
+        assertThat(booksMatrix[0][1], is("Title"));
         assertThat(booksMatrix[1][1], is("Water Margin"));
     }
 }

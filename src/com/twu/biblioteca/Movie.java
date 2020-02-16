@@ -8,8 +8,8 @@ public class Movie extends IntellectualProperty{
         this.rating = 0;
     }
 
-    public Movie(long id, String tittle, String author, int yearPublished, Customer checkOutBy, int rating) {
-        super(id, tittle, author, yearPublished, checkOutBy);
+    public Movie(long id, String title, String author, int yearPublished, Customer checkOutBy, int rating) {
+        super(id, title, author, yearPublished, checkOutBy);
         this.rating = (rating <= 10 && rating >=0) ? rating :  0;
     }
 
@@ -23,12 +23,12 @@ public class Movie extends IntellectualProperty{
 
     @Override
     public String[] getDetailToDisplayArray() {
-        return new String[]{String.valueOf(id),tittle,author,String.valueOf(yearPublished),String.valueOf(rating)};
+        return new String[]{String.valueOf(id),title,author,String.valueOf(yearPublished),String.valueOf(rating)};
     }
 
     @Override
     public String[] getFullDetailArray() {
-        return new String[]{String.valueOf(id),tittle,author,String.valueOf(yearPublished),super.getCheckOutUserId(),String.valueOf(rating)};
+        return new String[]{String.valueOf(id),title,author,String.valueOf(yearPublished),super.getCheckOutUserId(),String.valueOf(rating)};
     }
 
     @Override

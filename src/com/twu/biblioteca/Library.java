@@ -46,10 +46,10 @@ public class Library {
             return null;
         }
         String[][] result = new String[properties.size()+1][];
-        String[][] tittleMatrix = new String[][]{properties.get(0).getColumnNames()};
+        String[][] titleMatrix = new String[][]{properties.get(0).getColumnNames()};
         String[][] booksMatrix = properties.stream().map(property -> {return property.getDetailToDisplayArray();}).toArray(String[][]::new);
-        System.arraycopy(tittleMatrix, 0, result, 0, tittleMatrix.length);
-        System.arraycopy(booksMatrix, 0, result, tittleMatrix.length, booksMatrix.length);
+        System.arraycopy(titleMatrix, 0, result, 0, titleMatrix.length);
+        System.arraycopy(booksMatrix, 0, result, titleMatrix.length, booksMatrix.length);
         return result;
     }
 

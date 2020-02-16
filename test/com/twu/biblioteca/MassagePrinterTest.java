@@ -25,7 +25,7 @@ public class MassagePrinterTest {
     public void ShouldPrintBooksInfoInBoxFormat() {
         //given
         String[][] messages = new String[][]{
-            {"Tittle","Author","Year Published"},
+            {"Title","Author","Year Published"},
             {"Water Margin","Naian Shi","1992"},
             {"The Journey to the West","Chengen Wu","1990"}
         };
@@ -33,7 +33,7 @@ public class MassagePrinterTest {
         String boxMessage = MassagePrinter.getBoxFormatMessageForArrayList(messages);
         //then
         assertThat("=============================================================\n" +
-                          "|| Tittle                  || Author     || Year Published ||\n" +
+                          "|| Title                   || Author     || Year Published ||\n" +
                           "=============================================================\n" +
                           "|| Water Margin            || Naian Shi  || 1992           ||\n" +
                           "=============================================================\n" +

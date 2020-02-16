@@ -2,20 +2,20 @@ package com.twu.biblioteca;
 
 public abstract class IntellectualProperty{
     protected long id;
-    protected String tittle;
+    protected String title;
     protected String author;
     protected int yearPublished;
     protected Customer checkOutBy;
 
     public IntellectualProperty() {
-        tittle = "Tittle";
+        title = "Title";
         author = "author";
         yearPublished = 1880;
     }
 
-    public IntellectualProperty(long id, String tittle, String author, int yearPublished, Customer checkOutBy) {
+    public IntellectualProperty(long id, String title, String author, int yearPublished, Customer checkOutBy) {
         this.id = id;
-        this.tittle = tittle;
+        this.title = title;
         this.author = author;
         this.yearPublished = yearPublished;
         this.checkOutBy = checkOutBy;
