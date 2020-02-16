@@ -28,12 +28,12 @@ public class BibliotecaAppTest {
     @Before
     public void setUpLibrary(){
         library = Library.getInstance();
-        BibliotecaApp.setUpLibrary(library);
+        BibliotecaApp.setUpLibrary(library, "bookListTest.txt", "movieListTest.txt");
     }
 
     @Before
-    public void  setUpUser(){
-        BibliotecaApp.setUpUser();
+    public void setUpUser(){
+        BibliotecaApp.setUpUser(0);
     }
 
     @After
@@ -155,7 +155,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldExit() {
+    public void shouldSaveAfterExit() {
         //given
         String testString = "4";
         provideInput(testString);
@@ -163,8 +163,8 @@ public class BibliotecaAppTest {
         boolean stop = BibliotecaApp.menuSelection();
         // Then
         String exitMessage = "**************\n" +
-                             "*Best wishes!*\n" +
-                             "**************";
+                "*Best wishes!*\n" +
+                "**************";
         assertThat(testOut.toString().contains(exitMessage),is(true));
         assertThat(stop, is(false));
     }

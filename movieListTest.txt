@@ -1,0 +1,5 @@
+1,Spring in a Small Town,Fei Mu,1948,null,9
+2,Farewell My Concubine,Chen Kaige,1993,null,9
+3,A Better Tomorrow,John Woo,1986,null,8
+4,Days of Being Wild,Wong Kar-wai,1990,null,8
+5,In the Mood for Love,Wong Kar-wai,2000,null,7

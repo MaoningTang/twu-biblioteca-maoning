@@ -21,10 +21,11 @@ public class FileIO {
 
      public static void writeFile(String fileName, ArrayList<String[]> lines){
         try {
-            FileWriter writer = new FileWriter("fileName", false);
+            FileWriter writer = new FileWriter(fileName, false);
             lines.forEach(line -> {
                 try {
-                    writer.write(String.join(",", line) + "/n");
+                    writer.write(String.join(",", line));
+                    writer.write(System.getProperty("line.separator"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

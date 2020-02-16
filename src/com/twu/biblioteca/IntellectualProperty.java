@@ -56,12 +56,17 @@ public abstract class IntellectualProperty{
     public Customer getCheckOutBy() {
         return checkOutBy;
     }
+    public String getCheckOutUserId(){
+        return checkOutBy == null?"null":String.valueOf(checkOutBy.userId);
+    }
 
     public void setCheckOutBy(Customer checkOutBy) {
         this.checkOutBy = checkOutBy;
     }
 
-    public abstract String[] getDetailArray();
+    public abstract String[] getDetailToDisplayArray();
+
+    public abstract String[] getFullDetailArray();
 
     public abstract String[] getColumnNames();
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class BibliotecaApp {
 
@@ -22,7 +23,7 @@ public class BibliotecaApp {
     public static void start(){
         printWellcomeMessage();
         Library libraryInstance = Library.getInstance();
-        setUpLibrary(libraryInstance);
+        setUpLibrary(libraryInstance, "bookList.txt", "movieList.txt");
         boolean loginSuccess =  login("userInfo.txt");
         if (loginSuccess){
             setUpMenuItems();
@@ -45,23 +46,33 @@ public class BibliotecaApp {
         }
     }
 
-    public static void setUpLibrary(Library libraryInstance) {
+    public static void setUpLibrary(Library libraryInstance, String bookListFileName, String movieListFileName) {
         library = libraryInstance;
-        ArrayList<IntellectualProperty> books = new ArrayList<IntellectualProperty>(Arrays.asList(new Book(1,"Water Margin","Naian Shi",1999,null),
-                new Book(2,"The Journey to the West","Chengen Wu",1992,null),
-                new Book(3,"A Dream of Red Mansions","Xueqin Cao",1990,null),
-                new Book(4,"The Three Kingdoms Era","Guanzhong Luo",1997,null)));
-        ArrayList<IntellectualProperty> movies = new ArrayList<IntellectualProperty>(Arrays.asList(new Movie(1,"Spring in a Small Town","Fei Mu",1948,null,9),
-                new Movie(2,"Farewell My Concubine","Chen Kaige",1993,null,9),
-                new Movie(3,"A Better Tomorrow","John Woo",1986,null,8),
-                new Movie(4,"Days of Being Wild","Wong Kar-wai",1990,null,8),
-                new Movie(5,"In the Mood for Love","Wong Kar-wai",2000,null,7)));
+        ArrayList<IntellectualProperty> books = FileIO.readFile(bookListFileName).stream().map(line -> {
+            long id  = Long.valueOf(line[0]);
+            String tittle = line[1];
+            String author = line[2];
+            int year = Integer.valueOf(line[3]);
+            long userId = line[4].equals("null")?0:Long.valueOf(line[4]);
+            Customer customer = userId == 0?null:new Customer(userId);
+            return new Book(id, tittle, author, year,customer);
+        }).collect(Collectors.toCollection(ArrayList<IntellectualProperty>::new));
+        ArrayList<IntellectualProperty> movies = FileIO.readFile(movieListFileName).stream().map(line -> {
+            long id  = Long.valueOf(line[0]);
+            String tittle = line[1];
+            String author = line[2];
+            int year = Integer.valueOf(line[3]);
+            long userId = line[4].equals("null")?0:Long.valueOf(line[4]);
+            Customer customer = userId == 0?null:new Customer(userId);
+            int rating = Integer.valueOf(line[5]);
+            return new Movie(id, tittle, author, year,customer,rating);
+        }).collect(Collectors.toCollection(ArrayList<IntellectualProperty>::new));
         library.setBooks(books);
         library.setMovies(movies);
     }
 
-    public static void  setUpUser() {
-        user = new Customer(1);
+    public static void  setUpUser(long id ) {
+        user = new Customer(id);
     }
 
     public static void printWellcomeMessage(){
@@ -111,6 +122,7 @@ public class BibliotecaApp {
                 toReturnBookList();
                 break;
             case 4:
+                saveChanges("movieList.txt","bookList.txt");
                 printExitMessage();
                 repeat = false;
                 break;
@@ -151,6 +163,13 @@ public class BibliotecaApp {
             messages[0] = "Sorry, that movie is not available";
             System.out.println(MassagePrinter.printMessageWithBox(messages));
         }
+    }
+
+    private static void saveChanges(String movieFileName,String bookFileName){
+        FileIO.writeFile(bookFileName,library.getBooks().stream().map(
+                book -> book.getFullDetailArray()).collect(Collectors.toCollection(ArrayList<String[]>::new)));
+        FileIO.writeFile(movieFileName,library.getMovies().stream().map(
+                movie -> movie.getFullDetailArray()).collect(Collectors.toCollection(ArrayList<String[]>::new)));
     }
 
     private static void printExitMessage() {

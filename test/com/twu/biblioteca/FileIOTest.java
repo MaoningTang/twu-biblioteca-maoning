@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,12 +15,26 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class FileIOTest {
+
+    private static String fileName = "bookListTest.txt";
+    @AfterClass
+    public static void resetTestFile(){
+        ArrayList<String[]> listToWtite = new ArrayList<String[]>(Arrays.asList(
+                new String[]{"1", "Water Margin", "Naian Shi", "1999", "null"},
+                new String[]{"2", "The Journey to the West", "Chengen Wu", "1992", "null"},
+                new String[]{"3", "A Dream of Red Mansions", "Xueqin Cao", "1990", "null"},
+                new String[]{"4", "The Three Kingdoms Era", "Guanzhong Luo", "1997", "null"}
+        )
+        );
+        FileIO.writeFile(fileName,listToWtite);
+    }
+
     @Test
     public void ShouldGetFile() {
         //given
         String fileName = "bookListTest.txt";
         ArrayList<String[]> expectedArrayList = new ArrayList<String[]>(Arrays.asList(
-                new String[]{"1", "Water Margin", "Naian Shi", "1999", "1"},
+                new String[]{"1", "Water Margin", "Naian Shi", "1999", "null"},
                 new String[]{"2", "The Journey to the West","Chengen Wu", "1992", "null"},
                 new String[]{"3", "A Dream of Red Mansions", "Xueqin Cao", "1990", "null"},
                 new String[]{"4", "The Three Kingdoms Era", "Guanzhong Luo", "1997", "null"}

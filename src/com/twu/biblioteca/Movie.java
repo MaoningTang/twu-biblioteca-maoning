@@ -22,8 +22,13 @@ public class Movie extends IntellectualProperty{
     }
 
     @Override
-    public String[] getDetailArray() {
+    public String[] getDetailToDisplayArray() {
         return new String[]{String.valueOf(id),tittle,author,String.valueOf(yearPublished),String.valueOf(rating)};
+    }
+
+    @Override
+    public String[] getFullDetailArray() {
+        return new String[]{String.valueOf(id),tittle,author,String.valueOf(yearPublished),super.getCheckOutUserId(),String.valueOf(rating)};
     }
 
     @Override
