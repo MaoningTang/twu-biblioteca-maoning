@@ -39,7 +39,7 @@ public class BibliotecaApp {
         if (menuItems !=null){
             return;
         }
-        String menuTitle = "Menu   *Hint: Enter menu item number to select.*";
+        String menuTitle = "Menu";
         menuItems = new String[]{menuTitle,"List of books","List of movies","Return a book","Personal detail","Exit"};
         for (int i = 1; i < menuItems.length; i++){
             menuItems[i] = String.valueOf(i) + ". " + menuItems[i];
@@ -76,10 +76,8 @@ public class BibliotecaApp {
     }
 
     public static void printWellcomeMessage(){
-        String[] welcomeMessages = new String[2];
-        welcomeMessages[0] = "Welcome to Biblioteca.";
-        welcomeMessages[1] = "Your one-stop-shop for great book titles in Bangalore!";
-        System.out.println(MassagePrinter.printMessageWithBox(welcomeMessages));
+        String welcomeMessages = "Welcome to Biblioteca.Your one-stop-shop for great book titles in Bangalore!";
+        System.out.println(welcomeMessages);
     }
 
     public static void checkOutInBookList(){

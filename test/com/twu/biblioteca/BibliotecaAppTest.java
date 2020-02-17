@@ -52,28 +52,38 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void shouldPrintWelcomMessage(){
+        //given
+        String welcomeMessages = "Welcome to Biblioteca.Your one-stop-shop for great book titles in Bangalore!\n";
+        //when
+        BibliotecaApp.printWellcomeMessage();
+        //then
+        assertThat(testOut.toString(), is(welcomeMessages));
+    }
+
+    @Test
     public void shouldPrintMenu() {
         //given
-        String menuTitle = "Menu   *Hint: Enter menu item number to select.*";
+        String menuTitle = "Menu";
         BibliotecaApp.printMenu(new String[]{menuTitle,"1. List of books","2. Return a book","3. Exit"});
-        String menu = "======================================================\n" +
-                "|| Menu   *Hint: Enter menu item number to select.* ||\n" +
-                "======================================================\n" +
-                "|| 1. List of books                                 ||\n" +
-                "======================================================\n" +
-                "|| 2. Return a book                                 ||\n" +
-                "======================================================\n" +
-                "|| 3. Exit                                          ||\n" +
-                "======================================================";
+        String menu = "======================\n" +
+                      "|| Menu             ||\n" +
+                      "======================\n" +
+                      "|| 1. List of books ||\n" +
+                      "======================\n" +
+                      "|| 2. Return a book ||\n" +
+                      "======================\n" +
+                      "|| 3. Exit          ||\n" +
+                      "======================\n\n";
         // Then
-        assertThat(testOut.toString().contains(menu), is(true));
+        assertThat(testOut.toString(), is(menu));
     }
 
     @Test
     public void shouldHaveCorrectMenuItems() {
         //given
         BibliotecaApp.setUpMenuItems();
-        String[] menuItems = new String[]{"Menu   *Hint: Enter menu item number to select.*", "1. List of books", "2. List of movies", "3. Return a book","4. Personal detail", "5 .Exit"};
+        String[] menuItems = new String[]{"Menu", "1. List of books", "2. List of movies", "3. Return a book","4. Personal detail", "5 .Exit"};
         // Then
         assertThat(BibliotecaApp.getMenuItems().length, is(menuItems.length));
         assertThat(BibliotecaApp.getMenuItems()[0], is(menuItems[0]));
